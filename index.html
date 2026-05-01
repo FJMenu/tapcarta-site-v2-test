@@ -6,6 +6,9 @@
   <title>TapCarta — Menu digital, commande et réservation sans commission</title>
   <meta name="description" content="TapCarta transforme le QR code de votre restaurant en menu digital vivant avec commande, réservation, langue automatique et espace TapCarta Resto, sans commission." />
   <meta name="theme-color" content="#070707" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+  <link rel="shortcut icon" type="image/png" href="favicon.png" />
+  <link rel="apple-touch-icon" href="favicon.png" />
   <style>
     :root{
       --bg:#050505;
@@ -196,9 +199,41 @@
     .f1{left:0;top:125px}.f2{left:17px;top:235px}.f3{left:5px;top:345px}.f4{right:0;top:130px}.f5{right:-8px;top:240px}.f6{right:6px;top:350px}
 
     .max-card{
-      position:absolute;right:0;bottom:44px;z-index:4;width:min(360px,90%);border:1px solid var(--line-gold);border-radius:20px;padding:19px;background:linear-gradient(145deg,rgba(21,22,27,.94),rgba(8,8,8,.91));box-shadow:var(--shadow);display:flex;gap:14px;align-items:flex-start
+      position:absolute;
+      right:0;
+      bottom:34px;
+      z-index:4;
+      width:min(390px,92%);
+      border:1px solid var(--line-gold);
+      border-radius:22px;
+      padding:12px;
+      background:linear-gradient(145deg,rgba(21,22,27,.96),rgba(8,8,8,.92));
+      box-shadow:0 24px 70px rgba(0,0,0,.62),0 0 38px rgba(255,197,27,.14);
+      display:grid;
+      grid-template-columns:106px 1fr;
+      gap:14px;
+      align-items:center;
     }
-    .max-title{font-size:20px;font-weight:950;color:var(--gold);margin-bottom:5px}.max-card p{margin:0;color:#e8e8e8;font-size:14px;line-height:1.38}
+    .max-portrait{
+      width:106px;
+      height:112px;
+      border-radius:18px;
+      overflow:hidden;
+      border:1px solid rgba(255,197,27,.44);
+      background:#070707;
+      box-shadow:0 12px 35px rgba(255,197,27,.14);
+    }
+    .max-portrait img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      object-position:18% center;
+      transform:scale(1.42);
+      transform-origin:left center;
+    }
+    .max-kicker{font-size:11px;font-weight:950;letter-spacing:.7px;text-transform:uppercase;color:var(--gold-3);margin-bottom:4px}
+    .max-title{font-size:20px;font-weight:950;color:var(--gold);margin-bottom:5px}
+    .max-card p{margin:0;color:#e8e8e8;font-size:14px;line-height:1.38}
 
     .panel{border:1px solid var(--line);background:linear-gradient(145deg,rgba(22,24,29,.83),rgba(10,11,13,.82));border-radius:var(--radius);box-shadow:var(--shadow)}
     .language-panel{padding:30px 38px;margin:14px 0 34px;display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center}
@@ -425,8 +460,12 @@
           </div>
 
           <div class="max-card">
-            <div class="section-icon" style="width:52px;height:52px;border-radius:14px">🤖</div>
-            <div><div class="max-title">Max — prochainement</div><p>Une nouvelle génération d’outils TapCarta arrive bientôt. Pas encore vendu, pas encore promis comme actif.</p></div>
+            <div class="max-portrait"><img src="max-tapcarta.jpg" alt="Max, visage de TapCarta" loading="lazy"></div>
+            <div>
+              <div class="max-kicker">Visage TapCarta</div>
+              <div class="max-title">Max — prochainement</div>
+              <p>Max accompagne l’univers TapCarta dès aujourd’hui. Son rôle d’assistant IA utile au restaurant arrive progressivement, sans promesse active avant validation.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -636,7 +675,7 @@
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.2.1</span></div>
+      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.2.2</span></div>
       <div class="footer-links"><a href="#">Mentions légales</a><a href="#">Conditions générales</a><a href="#">Confidentialité</a><a href="#contact">Support</a></div>
     </div>
   </footer>
