@@ -210,7 +210,130 @@
     section{padding:44px 0}.section-head{text-align:center;max-width:760px;margin:0 auto 28px}.section-head p{color:#c6c7cc;line-height:1.55;font-size:17px;margin:0}
     .feature-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.feature-card{padding:26px 22px;text-align:center;min-height:210px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:12px}.feature-icon{width:58px;height:58px;display:grid;place-items:center;color:var(--gold)}.feature-icon svg{width:45px;height:45px}.feature-card h3{margin:0;font-size:19px;line-height:1.12}.feature-card p{margin:0;color:#c7c8cc;font-size:14px;line-height:1.5}
 
-    .offers{padding-top:20px}.pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;align-items:stretch}.pricing-card{padding:28px 24px;position:relative;overflow:hidden;min-height:360px;display:flex;flex-direction:column}.pricing-card.reco{border-color:var(--gold);box-shadow:0 0 0 1px rgba(255,197,27,.35),0 24px 70px rgba(0,0,0,.55),0 0 38px rgba(255,197,27,.14)}.ribbon{position:absolute;top:0;left:0;right:0;height:35px;background:linear-gradient(135deg,var(--gold),var(--gold-2));color:#211500;font-size:12px;font-weight:950;display:grid;place-items:center}.pricing-card.reco{padding-top:48px}.plan-title{font-size:24px;font-weight:850;margin-bottom:8px}.price{font-size:22px;font-weight:950;color:var(--gold);margin-bottom:22px}.price small{color:#ddd;font-size:13px;font-weight:600}.plan-list{display:grid;gap:12px;margin:0 0 24px;padding:0;list-style:none;color:#d7d8dc;font-size:14px;line-height:1.35}.plan-list li{display:flex;gap:9px;align-items:flex-start}.pricing-card .btn{margin-top:auto}.soon{color:var(--gold);font-weight:900;margin-bottom:20px}.compare-card{justify-content:center;text-align:center}.compare-card .plan-title{color:var(--gold);font-size:25px}.compare-card p{color:#d7d8dc;line-height:1.5;margin:16px 0 28px}
+    .offers{padding-top:20px}
+    .pricing-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;align-items:stretch}
+    .pricing-card{
+      padding:30px 24px;
+      position:relative;
+      overflow:hidden;
+      min-height:420px;
+      display:flex;
+      flex-direction:column;
+      border-color:rgba(255,255,255,.12);
+      background:
+        radial-gradient(circle at 22% 0%,rgba(255,197,27,.11),transparent 34%),
+        linear-gradient(145deg,rgba(25,27,33,.92),rgba(8,9,12,.9));
+      box-shadow:0 22px 60px rgba(0,0,0,.42);
+    }
+    .pricing-card:before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:linear-gradient(135deg,rgba(255,255,255,.12),transparent 32%,rgba(255,197,27,.08));
+      opacity:.55;
+    }
+    .pricing-card>*{position:relative;z-index:1}
+    .pricing-card.reco{
+      transform:translateY(-10px);
+      border-color:var(--gold);
+      background:
+        radial-gradient(circle at 50% -10%,rgba(255,197,27,.32),transparent 38%),
+        linear-gradient(145deg,rgba(34,28,14,.96),rgba(11,11,13,.94));
+      box-shadow:0 0 0 1px rgba(255,197,27,.42),0 34px 90px rgba(0,0,0,.68),0 0 55px rgba(255,197,27,.2);
+    }
+    .ribbon{
+      position:absolute;
+      top:0;
+      left:0;
+      right:0;
+      height:38px;
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      color:#211500;
+      font-size:12px;
+      font-weight:950;
+      letter-spacing:.6px;
+      text-transform:uppercase;
+      display:grid;
+      place-items:center;
+    }
+    .pricing-card.reco{padding-top:56px}
+    .plan-kicker{
+      color:var(--gold-3);
+      font-size:11px;
+      font-weight:950;
+      letter-spacing:.8px;
+      text-transform:uppercase;
+      margin-bottom:10px;
+    }
+    .plan-title{
+      font-size:26px;
+      font-weight:950;
+      margin-bottom:8px;
+      letter-spacing:-.5px;
+    }
+    .price{
+      font-size:26px;
+      font-weight:950;
+      color:var(--gold);
+      margin-bottom:12px;
+    }
+    .price small{color:#ddd;font-size:13px;font-weight:600}
+    .plan-desc{
+      margin:0 0 20px;
+      color:#cfd0d4;
+      font-size:14px;
+      line-height:1.45;
+      min-height:60px;
+    }
+    .plan-list{
+      display:grid;
+      gap:12px;
+      margin:0 0 24px;
+      padding:0;
+      list-style:none;
+      color:#e2e3e6;
+      font-size:14px;
+      line-height:1.35;
+    }
+    .plan-list li{display:flex;gap:9px;align-items:flex-start}
+    .pricing-card .btn{margin-top:auto}
+    .soon{
+      display:inline-flex;
+      width:max-content;
+      color:#211500;
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      border-radius:999px;
+      padding:7px 11px;
+      font-size:12px;
+      font-weight:950;
+      text-transform:uppercase;
+      letter-spacing:.5px;
+      margin-bottom:14px;
+    }
+    .max-pricing-card{
+      border-color:rgba(255,197,27,.32);
+    }
+    .max-mini-face{
+      width:48px;
+      height:48px;
+      border-radius:16px;
+      display:grid;
+      place-items:center;
+      margin-bottom:14px;
+      color:#211500;
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      font-size:13px;
+      font-weight:950;
+      box-shadow:0 12px 30px rgba(255,197,27,.16);
+    }
+    .compare-card{
+      justify-content:center;
+      text-align:center;
+      background:linear-gradient(145deg,rgba(19,21,26,.88),rgba(8,9,12,.86));
+    }
+    .compare-card .plan-title{color:var(--gold);font-size:25px}
+    .compare-card p{color:#d7d8dc;line-height:1.5;margin:16px 0 28px}
 
     .split{display:grid;grid-template-columns:.95fr 1.05fr;gap:22px;align-items:center}.story-card{padding:34px}.story-card h2{text-align:left}.story-card p{color:#d1d2d6;line-height:1.65}.bullet-grid{display:grid;gap:12px;margin-top:22px}.bullet{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid rgba(255,255,255,.1);border-radius:14px;background:rgba(255,255,255,.035)}.bullet strong{display:block;margin-bottom:3px}.bullet span:last-child{color:#c5c6ca;font-size:14px;line-height:1.35}
     .screen{padding:22px;background:#090a0c;border-radius:24px;border:1px solid var(--line);box-shadow:var(--shadow)}.screen-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:16px}.pill{display:inline-flex;align-items:center;gap:7px;background:rgba(255,197,27,.09);border:1px solid var(--line-gold);color:var(--gold-3);border-radius:999px;padding:7px 10px;font-size:12px;font-weight:800}.request{display:grid;gap:12px}.request-row{display:flex;justify-content:space-between;gap:20px;padding:14px;border-radius:15px;background:linear-gradient(145deg,#15171c,#0d0e11);border:1px solid rgba(255,255,255,.09)}.request-row small{color:var(--muted);display:block;margin-bottom:5px}.status{font-weight:900;color:var(--gold)}
@@ -352,12 +475,76 @@
           <h2>Nos <span>offres</span> adaptées à vos besoins</h2>
           <p>Une entrée simple, un pack complet, et une évolution Max annoncée clairement comme prochaine étape.</p>
         </div>
-        <div class="pricing-grid">
-          <article class="panel pricing-card"><div class="plan-title">Light</div><div class="price">Gratuit</div><ul class="plan-list"><li><span class="check">✓</span> Localisation</li><li><span class="check">✓</span> Bouton appel</li><li><span class="check">✓</span> Horaires</li><li><span class="check">✓</span> Page simple</li><li><span class="check">✓</span> Présence de base</li></ul><a class="btn" href="#activation">Commencer</a></article>
-          <article class="panel pricing-card"><div class="plan-title">Standard</div><div class="price">30€ <small>HTVA / mois</small></div><ul class="plan-list"><li><span class="check">✓</span> Menu digital complet</li><li><span class="check">✓</span> QR Code durable</li><li><span class="check">✓</span> Langue automatique</li><li><span class="check">✓</span> Site web simple</li><li><span class="check">✓</span> Appel, itinéraire, WhatsApp</li></ul><a class="btn" href="#activation">Choisir Standard</a></article>
-          <article class="panel pricing-card reco"><div class="ribbon">Recommandé</div><div class="plan-title">Plus</div><div class="price">45€ <small>HTVA / mois</small></div><ul class="plan-list"><li><span class="check">✓</span> Tout le pack Standard</li><li><span class="check">✓</span> Commande</li><li><span class="check">✓</span> Réservation</li><li><span class="check">✓</span> TapCarta Resto</li><li><span class="check">✓</span> Suivi des demandes</li><li><span class="check">✓</span> Sans commission</li></ul><a class="btn btn-primary" href="#activation">Choisir Plus</a></article>
-          <article class="panel pricing-card"><div class="plan-title">Max</div><div class="soon">Prochainement</div><ul class="plan-list"><li><span class="check">✓</span> IA pour vous assister</li><li><span class="check">✓</span> Traductions intelligentes</li><li><span class="check">✓</span> Descriptions optimisées</li><li><span class="check">✓</span> Analytics & avis clients</li><li><span class="check">✓</span> Automatisation réseaux sociaux</li><li><span class="check">✓</span> Et bien plus encore...</li></ul><a class="btn" href="#nouveautes">En savoir plus</a></article>
-          <article class="panel pricing-card compare-card"><div class="plan-title">Comparer les offres</div><p>Trouvez le pack qui correspond à votre restaurant et à votre rythme de départ.</p><a class="btn" href="#contact">Comparer →</a></article>
+        <div class="pricing-grid premium-pricing">
+          <article class="panel pricing-card">
+            <div class="plan-kicker">Présence essentielle</div>
+            <div class="plan-title">Light</div>
+            <div class="price">Gratuit</div>
+            <p class="plan-desc">Une première présence simple pour être trouvé rapidement.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> Localisation</li>
+              <li><span class="check">✓</span> Bouton appel</li>
+              <li><span class="check">✓</span> Horaires</li>
+              <li><span class="check">✓</span> Page simple</li>
+              <li><span class="check">✓</span> Présence de base</li>
+            </ul>
+            <a class="btn" href="#activation">Commencer</a>
+          </article>
+
+          <article class="panel pricing-card">
+            <div class="plan-kicker">Menu digital</div>
+            <div class="plan-title">Standard</div>
+            <div class="price">30€ <small>HTVA / mois</small></div>
+            <p class="plan-desc">Le socle propre pour remplacer une carte papier ou un QR basique.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> Menu digital complet</li>
+              <li><span class="check">✓</span> QR Code durable</li>
+              <li><span class="check">✓</span> Langue automatique</li>
+              <li><span class="check">✓</span> Site web simple</li>
+              <li><span class="check">✓</span> Appel, itinéraire, WhatsApp</li>
+            </ul>
+            <a class="btn" href="#activation">Choisir Standard</a>
+          </article>
+
+          <article class="panel pricing-card reco">
+            <div class="ribbon">Pack recommandé</div>
+            <div class="plan-kicker">Le plus complet aujourd’hui</div>
+            <div class="plan-title">Plus</div>
+            <div class="price">45€ <small>HTVA / mois</small></div>
+            <p class="plan-desc">Menu, réservations, commandes et interface restaurant dans un seul écosystème.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> Tout le pack Standard</li>
+              <li><span class="check">✓</span> Commande</li>
+              <li><span class="check">✓</span> Réservation</li>
+              <li><span class="check">✓</span> TapCarta Resto</li>
+              <li><span class="check">✓</span> Suivi des demandes</li>
+              <li><span class="check">✓</span> Sans commission</li>
+            </ul>
+            <a class="btn btn-primary" href="#activation">Choisir Plus</a>
+          </article>
+
+          <article class="panel pricing-card max-pricing-card">
+            <div class="max-mini-face">Max</div>
+            <div class="plan-kicker">Assistant TapCarta</div>
+            <div class="plan-title">Max</div>
+            <div class="soon">Prochainement</div>
+            <p class="plan-desc">Le visage de TapCarta aujourd’hui, et demain un assistant IA utile pour accompagner le restaurant.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> Assistance IA en préparation</li>
+              <li><span class="check">✓</span> Traductions mieux cadrées</li>
+              <li><span class="check">✓</span> Descriptions optimisées</li>
+              <li><span class="check">✓</span> Aide au contenu</li>
+              <li><span class="check">✓</span> Évolutions progressives</li>
+            </ul>
+            <a class="btn" href="#nouveautes">Découvrir Max</a>
+          </article>
+
+          <article class="panel pricing-card compare-card">
+            <div class="plan-kicker">Besoin d’aide ?</div>
+            <div class="plan-title">Comparer les offres</div>
+            <p>Trouvez le pack qui correspond à votre restaurant et à votre rythme de départ.</p>
+            <a class="btn" href="#contact">Comparer →</a>
+          </article>
         </div>
       </div>
     </section>
@@ -449,7 +636,7 @@
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.1.1</span></div>
+      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.2.1</span></div>
       <div class="footer-links"><a href="#">Mentions légales</a><a href="#">Conditions générales</a><a href="#">Confidentialité</a><a href="#contact">Support</a></div>
     </div>
   </footer>
