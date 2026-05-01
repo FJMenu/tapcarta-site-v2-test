@@ -104,17 +104,19 @@
     }
 
     .brand-icon{
-      width:56px;
-      height:56px;
-      border-radius:18px;
+      width:220px;
+      height:auto;
       display:flex;
       align-items:center;
-      justify-content:center;
-      background:linear-gradient(180deg, #1d1d1d 0%, #111 100%);
-      border:1px solid rgba(242,199,68,.28);
-      box-shadow:var(--shadow);
+      justify-content:flex-start;
       flex-shrink:0;
-      overflow:hidden;
+      overflow:visible;
+    }
+    .brand-logo{
+      display:block;
+      width:240px;
+      max-width:100%;
+      height:auto;
     }
 
     .brand-icon svg{
@@ -934,12 +936,8 @@
         padding:20px;
       }
 
-      .brand-title{
-        font-size:25px;
-      }
-
-      .brand-sub{
-        white-space:normal;
+      .brand-logo{
+        width:190px;
       }
 
       .hero-actions,
@@ -969,29 +967,11 @@
   <header class="topbar">
     <div class="container topbar-inner">
       <a href="#top" class="brand" aria-label="TapCarta">
-        <div class="brand-icon" aria-hidden="true">
-          <svg viewBox="0 0 64 64" fill="none">
-            <rect x="15" y="6" width="34" height="52" rx="9" stroke="#F2C744" stroke-width="3"/>
-            <rect x="27" y="11" width="10" height="3" rx="1.5" fill="#F2C744"/>
-            <rect x="10" y="18" width="8" height="8" fill="#F2C744"/>
-            <rect x="20" y="18" width="8" height="8" fill="#F2C744"/>
-            <rect x="30" y="18" width="8" height="8" fill="#F2C744"/>
-            <rect x="10" y="28" width="8" height="8" fill="#F2C744"/>
-            <rect x="30" y="28" width="8" height="8" fill="#F2C744"/>
-            <rect x="40" y="28" width="8" height="8" fill="#F2C744"/>
-            <rect x="10" y="38" width="8" height="8" fill="#F2C744"/>
-            <rect x="20" y="38" width="8" height="8" fill="#F2C744"/>
-            <rect x="40" y="38" width="8" height="8" fill="#F2C744"/>
-            <circle cx="31" cy="35" r="6" fill="#ffffff"/>
-            <path d="M31 29.8c2.9 0 5.2 2.2 5.2 5.1 0 2.1-1.2 3.9-3.1 4.7" stroke="#111" stroke-width="2.3" stroke-linecap="round"/>
-            <path d="M32 40.8l5.4 5.4" stroke="#111" stroke-width="3" stroke-linecap="round"/>
-          </svg>
-        </div>
-
-        <div class="brand-text">
-          <div class="brand-title"><span class="tap">Tap</span><span class="carta">Carta</span></div>
-          <div class="brand-sub" data-i18n="brand_sub">Menu QR pour restaurants</div>
-        </div>
+        <img
+          class="brand-logo"
+          src="https://i.postimg.cc/fknHC69h/logo-app-web-sans-fond.png"
+          alt="TapCarta App - Web"
+        >
       </a>
 
       <div class="topbar-right">
@@ -1355,7 +1335,7 @@
   </footer>
 
  <script>
-const SITE_VERSION = "V2.1.1.1";
+const SITE_VERSION = "V2.1.1.2";
 
 const CONFIG = {
   SITE_VERSION,
