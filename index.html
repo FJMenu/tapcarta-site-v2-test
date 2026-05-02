@@ -357,21 +357,17 @@ h1 span{color:var(--gold)}
           <div class="brand-sub">App · Web</div>
         </div>
       </a>
-      <div class="panel language-panel">
-        <div class="language-left">
-          <div class="section-icon">🌐</div>
-          <div>
-            <h2>La langue détectée <span>automatiquement</span></h2>
-            <p>Vos clients voient automatiquement votre menu dans leur langue, sans manipulation compliquée. Idéal pour les zones touristiques et les restaurants multilingues.</p>
-          </div>
-        </div>
-        <div class="langs">
-          <div class="lang"><div class="flag">🇪🇸</div><span>Bienvenido, su menú en su idioma</span></div>
-          <div class="lang"><div class="flag">🇬🇧</div><span>Welcome, your menu in your language</span></div>
-          <div class="lang"><div class="flag">🇫🇷</div><span>Bienvenue, votre menu dans votre langue</span></div>
-          <div class="lang"><div class="flag plus">+</div><span>Et d’autres langues...</span></div>
-        </div>
-      </div>
+
+      <nav class="nav-links" aria-label="Navigation principale">
+        <a class="active" href="#accueil" data-i18n="nav.home">Accueil</a>
+        <a href="#fonctionnalites" data-i18n="nav.features">Fonctionnalités</a>
+        <a href="#offres" data-i18n="nav.plans">Offres</a>
+        <a href="#demo" data-i18n="nav.demo">Démo</a>
+        <a href="#referencement" data-i18n="nav.seo">Référencement</a>
+        <a href="#nouveautes" data-i18n="nav.news">Nouveautés</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+      </nav>
+
       <div class="nav-actions">
         <div class="lang-switch" aria-label="Choix de la langue">
           <button type="button" data-lang-btn="fr">FR</button>
@@ -417,9 +413,9 @@ h1 span{color:var(--gold)}
           <div class="max-card">
             <div class="max-badge">MAX</div>
             <div>
-              <div class="max-title">Votre futur assistant restaurant</div>
-              <p>Traductions · descriptions · réseaux sociaux · suivi des demandes</p>
-              <div class="max-note">Arrive progressivement dans TapCarta</div>
+              <div class="max-title" data-i18n="max.title">Votre futur assistant restaurant</div>
+              <p data-i18n="max.text">Traductions · descriptions · réseaux sociaux · suivi des demandes</p>
+              <div class="max-note" data-i18n="max.note">Arrive progressivement dans TapCarta</div>
             </div>
           </div>
         </div>
@@ -630,7 +626,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.3.3</span></div>
+      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.3.4</span></div>
       <div class="footer-links"><a href="#">Mentions légales</a><a href="#">Conditions générales</a><a href="#">Confidentialité</a><a href="#contact">Support</a></div>
     </div>
   </footer>
