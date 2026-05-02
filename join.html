@@ -6,78 +6,111 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body>
+<body style="font-family:sans-serif; background:#0f172a; color:#fff; margin:0;">
 
-  <!-- NAV SIMPLE (temporaire) -->
-  <header>
-    <a href="index.html">TapCarta</a>
-  </header>
+<header style="padding:15px; border-bottom:1px solid #1e293b;">
+  <a href="index.html" style="color:#facc15; text-decoration:none;">TapCarta</a>
+</header>
 
-  <!-- CONTENU PRINCIPAL -->
-  <main style="padding:20px; max-width:600px; margin:auto;">
+<main style="padding:20px; max-width:700px; margin:auto;">
 
-    <h1 data-i18n="join.title">
-      Bienvenue dans la communauté TapCarta
-    </h1>
+<h1 data-i18n="join.title">
+Bienvenue dans la communauté TapCarta
+</h1>
 
-    <p data-i18n="join.intro">
-      Complétez quelques informations pour créer votre espace TapCarta et commencer à préparer votre présence.
-    </p>
+<p data-i18n="join.intro">
+Complétez quelques informations pour créer votre espace TapCarta et commencer à préparer votre présence.
+</p>
 
-    <!-- FORMULAIRE -->
-    <form>
+<form style="display:flex; flex-direction:column; gap:12px;">
 
-      <h3 data-i18n="join.section.identity">Informations de contact</h3>
+<h3>Contact</h3>
+<input type="text" placeholder="Nom et prénom" required>
+<input type="email" placeholder="Email" required>
+<input type="tel" placeholder="Téléphone / WhatsApp" required>
+<input type="text" placeholder="Langue préférée">
 
-      <input type="text" placeholder="Nom et prénom" required>
-      <input type="email" placeholder="Email" required>
-      <input type="tel" placeholder="Téléphone / WhatsApp" required>
+<h3>Établissement</h3>
+<input type="text" placeholder="Nom du restaurant" required>
+<input type="text" placeholder="Type d’établissement">
+<input type="text" placeholder="Ville" required>
+<input type="text" placeholder="Pays" required>
+<input type="text" placeholder="Adresse (optionnel)">
+<input type="text" placeholder="Site web / réseaux (optionnel)">
 
-      <h3 data-i18n="join.section.restaurant">Établissement</h3>
+<h3>Rôle</h3>
+<select>
+<option>Propriétaire</option>
+<option>Gérant</option>
+<option>Associé</option>
+<option>Employé autorisé</option>
+<option>Autre</option>
+</select>
 
-      <input type="text" placeholder="Nom du restaurant" required>
-      <input type="text" placeholder="Ville" required>
-      <input type="text" placeholder="Pays" required>
+<h3>Données légales</h3>
+<input type="text" placeholder="Nom légal / société">
+<input type="text" placeholder="Numéro fiscal (CIF / TVA / NIE)">
+<input type="email" placeholder="Email de facturation">
 
-      <h3 data-i18n="join.section.offer">Offre</h3>
+<small>Ces informations seront nécessaires pour finaliser votre accès complet.</small>
 
-      <select>
-        <option>Light</option>
-        <option>Standard</option>
-        <option>Standard + Web</option>
-        <option>Je ne sais pas encore</option>
-      </select>
+<h3>Offre souhaitée</h3>
+<select>
+<option>Light</option>
+<option>Standard</option>
+<option>Standard + Web</option>
+<option>Max (prochainement)</option>
+<option>Je souhaite être conseillé</option>
+</select>
 
-      <h3 data-i18n="join.section.languages">Langues</h3>
+<h3>Besoins</h3>
+<label><input type="checkbox"> Menu digital</label>
+<label><input type="checkbox"> Commande</label>
+<label><input type="checkbox"> Réservation</label>
+<label><input type="checkbox"> Site web</label>
+<label><input type="checkbox"> Traduction</label>
+<label><input type="checkbox"> Avis / réputation</label>
 
-      <input type="text" placeholder="Langue principale">
-      <input type="text" placeholder="Langues souhaitées (optionnel)">
+<h3>Langues</h3>
+<input type="text" placeholder="Langue principale">
+<input type="text" placeholder="Langues souhaitées">
 
-      <h3 data-i18n="join.section.legal">Validation</h3>
+<small>Les langues peuvent être adaptées selon votre établissement.</small>
 
-      <label>
-        <input type="checkbox" required>
-        <span data-i18n="join.check.authorized">
-          Je déclare être autorisé à engager l’établissement.
-        </span>
-      </label>
+<h3>Message</h3>
+<textarea placeholder="Votre message"></textarea>
 
-      <label>
-        <input type="checkbox" required>
-        <span data-i18n="join.check.data">
-          Je confirme que les informations transmises sont exactes.
-        </span>
-      </label>
+<h3>Validation</h3>
 
-      <br><br>
+<label>
+<input type="checkbox" required>
+Je déclare être autorisé à engager l’établissement.
+</label>
 
-      <button type="submit" data-i18n="join.submit">
-        Créer mon espace TapCarta
-      </button>
+<label>
+<input type="checkbox" required>
+Je confirme que les informations transmises sont exactes.
+</label>
 
-    </form>
+<label>
+<input type="checkbox" required>
+J’accepte d’être contacté au sujet de ma demande.
+</label>
 
-  </main>
+<label>
+<input type="checkbox" required>
+Je comprends que certaines informations sont nécessaires pour finaliser l’accès complet.
+</label>
+
+<br>
+
+<button type="submit" style="background:#facc15; color:#000; padding:12px; border:none; cursor:pointer;">
+Créer mon espace TapCarta
+</button>
+
+</form>
+
+</main>
 
 </body>
 </html>
