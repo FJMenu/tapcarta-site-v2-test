@@ -482,7 +482,7 @@
       fr:{
         title:'Offre conseillée :',
         empty:'Sélectionnez vos besoins pour obtenir une recommandation.',
-        light:'Light — gratuit : présence simple avec localisation, horaires et bouton appel.',
+        light:'Light — gratuit : présence simple avec localisation, horaires et bouton appel. Vous pouvez aussi choisir une formule supérieure pour ajouter un menu digital, des commandes ou des réservations.',
         standard:'Standard — 30 € HTVA / mois : menu digital complet, multilingue, QR durable et site web simple inclus.',
         plus:'Plus — 45 € HTVA / mois : Standard + commande, réservation, TapCarta Resto et suivi des demandes.',
         advice:'Conseil personnalisé : nous vous orienterons vers la formule la plus adaptée.',
@@ -491,7 +491,7 @@
       es:{
         title:'Oferta recomendada:',
         empty:'Seleccione sus necesidades para obtener una recomendación.',
-        light:'Light — gratuito: presencia simple con localización, horarios y botón de llamada.',
+        light:'Light — gratuito: presencia simple con localización, horarios y botón de llamada. También puede elegir una fórmula superior para añadir menú digital, pedidos o reservas.',
         standard:'Standard — 30 € HTVA / mes: menú digital completo, multilingüe, QR duradero y sitio web simple incluido.',
         plus:'Plus — 45 € HTVA / mes: Standard + pedidos, reservas, TapCarta Resto y seguimiento de solicitudes.',
         advice:'Asesoramiento personalizado: le orientaremos hacia la fórmula más adecuada.',
@@ -500,7 +500,7 @@
       en:{
         title:'Recommended offer:',
         empty:'Select your needs to get a recommendation.',
-        light:'Light — free: simple presence with location, opening hours and call button.',
+        light:'Light — free: simple presence with location, opening hours and call button. You can also choose a higher plan to add a digital menu, orders or bookings.',
         standard:'Standard — €30 excl. VAT / month: full digital menu, multilingual display, durable QR and simple website included.',
         plus:'Plus — €45 excl. VAT / month: Standard + ordering, booking, TapCarta Resto and request tracking.',
         advice:'Personalized advice: we will guide you toward the most suitable plan.',
@@ -509,7 +509,7 @@
       nl:{
         title:'Aanbevolen formule:',
         empty:'Selecteer uw behoeften om een aanbeveling te krijgen.',
-        light:'Light — gratis: eenvoudige aanwezigheid met locatie, openingsuren en belknop.',
+        light:'Light — gratis: eenvoudige aanwezigheid met locatie, openingsuren en belknop. U kunt ook een hogere formule kiezen om een digitaal menu, bestellingen of reserveringen toe te voegen.',
         standard:'Standard — 30 € excl. btw / maand: volledig digitaal menu, meertalig, duurzame QR en eenvoudige website inbegrepen.',
         plus:'Plus — 45 € excl. btw / maand: Standard + bestellen, reserveren, TapCarta Resto en opvolging van aanvragen.',
         advice:'Persoonlijk advies: wij begeleiden u naar de meest geschikte formule.',
@@ -526,13 +526,13 @@
 
       const needs = Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(input=>input.value);
 
-      let recommendedOffer = 'needs_advice';
-      let messageKey = 'advice';
+      let recommendedOffer = 'light';
+      let messageKey = 'light';
       let showMaxNotice = false;
 
       if(needs.length === 0){
-        recommendedOffer = 'needs_advice';
-        messageKey = 'empty';
+        recommendedOffer = 'light';
+        messageKey = 'light';
       }
       else if(needs.includes('reviews') || needs.includes('translation')){
         recommendedOffer = 'plus';
