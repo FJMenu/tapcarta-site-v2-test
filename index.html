@@ -121,6 +121,31 @@
     .nav-links a:hover,.nav-links a.active{color:var(--gold);border-bottom-color:var(--gold)}
 
     .nav-actions{display:flex;align-items:center;gap:10px;min-width:max-content}
+    .lang-switch{
+      display:inline-flex;
+      align-items:center;
+      gap:3px;
+      padding:4px;
+      border:1px solid rgba(255,197,27,.28);
+      border-radius:999px;
+      background:rgba(255,255,255,.045);
+    }
+    .lang-switch button{
+      border:0;
+      border-radius:999px;
+      padding:6px 8px;
+      background:transparent;
+      color:#d8d8d8;
+      font-size:11px;
+      font-weight:900;
+      cursor:pointer;
+      line-height:1;
+    }
+    .lang-switch button.active{
+      background:linear-gradient(135deg,var(--gold),var(--gold-2));
+      color:#171000;
+      box-shadow:0 0 18px rgba(255,197,27,.22);
+    }
 
     .btn{
       display:inline-flex;
@@ -593,7 +618,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.2.9</span></div>
+      <div>© 2026 TapCarta — Tous droits réservés <span class="version">· Site V2.1.3.1</span></div>
       <div class="footer-links"><a href="#">Mentions légales</a><a href="#">Conditions générales</a><a href="#">Confidentialité</a><a href="#contact">Support</a></div>
     </div>
   </footer>
@@ -601,14 +626,136 @@ h1 span{color:var(--gold)}
   <script>
     (() => {
       const STORAGE_KEY = 'tapcarta_lang';
-      const lang = (navigator.language || 'fr').slice(0, 2).toLowerCase();
-      try {
-        if (!localStorage.getItem(STORAGE_KEY)) {
-          localStorage.setItem(STORAGE_KEY, lang);
+      const SUPPORTED_LANGS = ['fr', 'es', 'en', 'nl'];
+
+      const translations = {
+        fr: {
+          'nav.resto': 'Espace Restaurant',
+          'nav.activate': 'Activer mon établissement',
+          'hero.eyebrow': 'Menu digital vivant · QR durable · Sans commission',
+          'hero.title': 'Le menu digital qui fait <span>évoluer votre restaurant</span>',
+          'hero.text': 'TapCarta simplifie votre quotidien et améliore l’expérience de vos clients : menu mobile, langue automatique, commande, réservation et suivi clair côté restaurateur.',
+          'hero.primary': 'Découvrir nos offres',
+          'hero.demo': 'Voir la démo',
+          'hero.trust1': 'Activation rapide',
+          'hero.trust2': 'Contrat en ligne',
+          'hero.trust3': 'QR durable',
+          'hero.trust4': 'Sans commission',
+          'max.title': 'Votre futur assistant restaurant',
+          'max.text': 'Traductions · descriptions · réseaux sociaux · suivi des demandes',
+          'max.note': 'Arrive progressivement dans TapCarta',
+          'lang.title': 'La langue détectée <span>automatiquement</span>',
+          'lang.text': 'Vos clients voient automatiquement votre menu dans leur langue, sans manipulation compliquée. Idéal pour les zones touristiques et les restaurants multilingues.',
+          'lang.es': 'Bienvenido, su menú en su idioma',
+          'lang.en': 'Welcome, your menu in your language',
+          'lang.fr': 'Bienvenue, votre menu dans votre langue',
+          'lang.nl': 'Welkom, uw menu in uw taal'
+        },
+        es: {
+          'nav.resto': 'Espacio Restaurante',
+          'nav.activate': 'Activar mi establecimiento',
+          'hero.eyebrow': 'Menú digital vivo · QR duradero · Sin comisión',
+          'hero.title': 'El menú digital que hace <span>evolucionar su restaurante</span>',
+          'hero.text': 'TapCarta simplifica su día a día y mejora la experiencia de sus clientes: menú móvil, idioma automático, pedidos, reservas y seguimiento claro para el restaurante.',
+          'hero.primary': 'Ver nuestras ofertas',
+          'hero.demo': 'Ver la demo',
+          'hero.trust1': 'Activación rápida',
+          'hero.trust2': 'Contrato online',
+          'hero.trust3': 'QR duradero',
+          'hero.trust4': 'Sin comisión',
+          'max.title': 'Su futuro asistente para restaurante',
+          'max.text': 'Traducciones · descripciones · redes sociales · seguimiento de solicitudes',
+          'max.note': 'Llegará progresivamente a TapCarta',
+          'lang.title': 'El idioma se detecta <span>automáticamente</span>',
+          'lang.text': 'Sus clientes ven automáticamente el menú en su idioma, sin manipulaciones complicadas. Ideal para zonas turísticas y restaurantes multilingües.',
+          'lang.es': 'Bienvenido, su menú en su idioma',
+          'lang.en': 'Welcome, your menu in your language',
+          'lang.fr': 'Bienvenue, votre menu dans votre langue',
+          'lang.nl': 'Welkom, uw menu in uw taal'
+        },
+        en: {
+          'nav.resto': 'Restaurant Area',
+          'nav.activate': 'Activate my venue',
+          'hero.eyebrow': 'Living digital menu · Durable QR · No commission',
+          'hero.title': 'The digital menu that helps <span>your restaurant evolve</span>',
+          'hero.text': 'TapCarta simplifies daily operations and improves your guests’ experience: mobile menu, automatic language, orders, reservations and clear restaurant-side tracking.',
+          'hero.primary': 'Discover our plans',
+          'hero.demo': 'View the demo',
+          'hero.trust1': 'Fast activation',
+          'hero.trust2': 'Online contract',
+          'hero.trust3': 'Durable QR',
+          'hero.trust4': 'No commission',
+          'max.title': 'Your future restaurant assistant',
+          'max.text': 'Translations · descriptions · social media · request tracking',
+          'max.note': 'Progressively coming to TapCarta',
+          'lang.title': 'Language detected <span>automatically</span>',
+          'lang.text': 'Your guests automatically see the menu in their language, with no complicated steps. Ideal for tourist areas and multilingual restaurants.',
+          'lang.es': 'Bienvenido, su menú en su idioma',
+          'lang.en': 'Welcome, your menu in your language',
+          'lang.fr': 'Bienvenue, votre menu dans votre langue',
+          'lang.nl': 'Welkom, uw menu in uw taal'
+        },
+        nl: {
+          'nav.resto': 'Restaurantomgeving',
+          'nav.activate': 'Mijn zaak activeren',
+          'hero.eyebrow': 'Levend digitaal menu · Duurzame QR · Geen commissie',
+          'hero.title': 'Het digitale menu dat <span>uw restaurant laat evolueren</span>',
+          'hero.text': 'TapCarta vereenvoudigt uw dagelijkse werking en verbetert de ervaring van uw klanten: mobiel menu, automatische taal, bestellingen, reservaties en duidelijke opvolging voor het restaurant.',
+          'hero.primary': 'Onze formules bekijken',
+          'hero.demo': 'Demo bekijken',
+          'hero.trust1': 'Snelle activatie',
+          'hero.trust2': 'Online contract',
+          'hero.trust3': 'Duurzame QR',
+          'hero.trust4': 'Geen commissie',
+          'max.title': 'Uw toekomstige restaurantassistent',
+          'max.text': 'Vertalingen · beschrijvingen · sociale media · opvolging van aanvragen',
+          'max.note': 'Komt geleidelijk naar TapCarta',
+          'lang.title': 'De taal wordt <span>automatisch</span> herkend',
+          'lang.text': 'Uw klanten zien het menu automatisch in hun eigen taal, zonder ingewikkelde handelingen. Ideaal voor toeristische zones en meertalige restaurants.',
+          'lang.es': 'Bienvenido, su menú en su idioma',
+          'lang.en': 'Welcome, your menu in your language',
+          'lang.fr': 'Bienvenue, votre menu dans votre langue',
+          'lang.nl': 'Welkom, uw menu in uw taal'
         }
-      } catch (error) {
-        // localStorage is only used for language comfort. It is never a business source of truth.
-      }
+      };
+
+      const getInitialLang = () => {
+        try {
+          const saved = localStorage.getItem(STORAGE_KEY);
+          if (SUPPORTED_LANGS.includes(saved)) return saved;
+        } catch (error) {
+          // localStorage is only used for language comfort.
+        }
+
+        const browserLang = (navigator.language || 'fr').slice(0, 2).toLowerCase();
+        return SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'fr';
+      };
+
+      const applyLang = (lang) => {
+        const dict = translations[lang] || translations.fr;
+        document.documentElement.lang = lang;
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          const key = el.getAttribute('data-i18n');
+          if (dict[key]) el.innerHTML = dict[key];
+        });
+
+        document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+          btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
+        });
+
+        try {
+          localStorage.setItem(STORAGE_KEY, lang);
+        } catch (error) {
+          // localStorage is only used for language comfort.
+        }
+      };
+
+      document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+        btn.addEventListener('click', () => applyLang(btn.getAttribute('data-lang-btn')));
+      });
+
+      applyLang(getInitialLang());
 
       const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
       const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
