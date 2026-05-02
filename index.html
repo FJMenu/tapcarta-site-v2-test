@@ -349,6 +349,11 @@ h1 span{color:var(--gold)}
 
     footer{border-top:1px solid rgba(255,255,255,.09);padding:24px 0;color:#8d9097;font-size:13px}.footer-row{display:flex;justify-content:space-between;gap:16px;align-items:center;flex-wrap:wrap}.footer-links{display:flex;gap:22px;flex-wrap:wrap}.version{color:#6f7279}
 
+    .reveal-ready{opacity:0;transform:translateY(22px);filter:blur(2px);transition:opacity .72s ease,transform .72s ease,filter .72s ease}.reveal-ready.reveal-visible{opacity:1;transform:translateY(0);filter:blur(0)}.feature-card.reveal-visible .feature-icon,.proof-card.reveal-visible .mini-icon,.step-card.reveal-visible .mini-icon{animation:iconGlow 1.35s ease both}.panel.reveal-visible,.feature-card.reveal-visible,.pricing-card.reveal-visible,.proof-card.reveal-visible,.step-card.reveal-visible,.news-card.reveal-visible{box-shadow:0 24px 80px rgba(0,0,0,.38),0 0 28px rgba(255,197,27,.045)}
+    @keyframes heroFloat{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-50%,calc(-50% - 9px))}}@keyframes maxFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}@keyframes haloBreath{0%,100%{opacity:.72;filter:blur(3px)}50%{opacity:1;filter:blur(6px)}}@keyframes iconGlow{0%{transform:scale(.96);box-shadow:0 0 0 rgba(255,197,27,0)}55%{transform:scale(1.035);box-shadow:0 0 28px rgba(255,197,27,.18)}100%{transform:scale(1);box-shadow:0 18px 48px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.08)}}
+    @media (prefers-reduced-motion:no-preference){.phone-stage{animation:heroFloat 7s ease-in-out infinite}.max-zone{animation:maxFloat 6.5s ease-in-out infinite}.halo{animation:haloBreath 5.8s ease-in-out infinite}.hero-phone-img{transition:filter .4s ease}.feature-card,.pricing-card,.proof-card,.step-card,.news-card,.panel{will-change:transform,opacity}}
+    @media (prefers-reduced-motion:reduce){.reveal-ready{opacity:1;transform:none;filter:none;transition:none}.phone-stage,.max-zone,.halo,.feature-icon,.mini-icon{animation:none!important}}
+
     @media (max-width:1080px){.nav-links{display:none}.hero-grid,.split{grid-template-columns:1fr}.visual-wrap{min-height:540px}.pricing-grid{grid-template-columns:repeat(2,1fr)}.pricing-card:last-child{grid-column:auto}.feature-grid{grid-template-columns:repeat(2,1fr)}.proof-row,.steps,.news-grid{grid-template-columns:repeat(2,1fr)}.language-panel{grid-template-columns:1fr}.langs{grid-template-columns:repeat(4,1fr)}}
     @media (max-width:720px){.container{width:min(var(--max), calc(100% - 22px))}.nav{height:auto;padding:14px 0;align-items:flex-start}.brand-title{font-size:26px}.brand-sub{font-size:12px}.nav-actions{display:flex;width:100%;justify-content:flex-start}.nav-actions .btn{display:none}.lang-switch{margin-top:4px}.hero{padding-top:30px;padding-bottom:28px}.hero-grid{gap:18px}h1{letter-spacing:-2px;font-size:clamp(40px,12vw,58px)}.hero-text{font-size:17px}.btn{width:100%;padding-inline:16px}.trust-row{gap:10px;display:grid}.visual-wrap{min-height:560px;margin-top:4px;display:block}.halo{left:50%;top:58%;width:420px;height:420px}.phone-stage{position:absolute;left:50%;top:62%;width:min(480px,108vw);max-width:108vw;transform:translate(-50%,-50%);margin:0}.hero-phone-img{width:100%}.orbit{left:50%;bottom:42px;width:300px}.max-zone{position:absolute;left:50%;right:auto;top:0;width:min(372px,94vw);transform:translateX(-50%);display:grid;grid-template-columns:124px 1fr;align-items:center;gap:0;justify-items:stretch;padding:10px 8px;border-radius:28px;background:radial-gradient(circle at 24% 48%,rgba(255,197,27,.22),transparent 34%),linear-gradient(135deg,rgba(0,0,0,.74),rgba(25,19,7,.52));box-shadow:0 0 45px rgba(255,197,27,.18),inset 0 1px 0 rgba(255,255,255,.06)}.max-portrait{width:132px;height:150px;margin-left:-6px;border-radius:26px;background:radial-gradient(circle at 50% 42%,rgba(255,197,27,.24),transparent 58%),linear-gradient(180deg,rgba(0,0,0,.10),rgba(0,0,0,.72));box-shadow:0 18px 48px rgba(0,0,0,.48),0 0 34px rgba(255,197,27,.20);overflow:hidden}.max-portrait img{width:272px;left:50%;top:50%;transform:translate(-50%,-43%)}.max-card{width:100%;margin-top:0;padding:12px;border-radius:20px;gap:10px;background:linear-gradient(145deg,rgba(25,20,9,.96),rgba(5,5,5,.91));box-shadow:0 18px 55px rgba(0,0,0,.48),0 0 34px rgba(255,197,27,.18),inset 0 1px 0 rgba(255,255,255,.08)}.max-badge{width:44px;height:44px;border-radius:14px;font-size:12px}.max-title{font-size:15px}.max-card p{font-size:11.5px}.max-note{font-size:10.5px;padding:4px 7px}.visual-wrap>.float-card{display:none}.language-left{display:grid;grid-template-columns:1fr;gap:16px;align-items:flex-start}.language-panel{padding:24px;overflow:hidden}.language-panel h2{font-size:clamp(26px,7vw,30px);overflow-wrap:normal}.langs{grid-template-columns:repeat(2,1fr)}.feature-grid,.pricing-grid,.proof-row,.steps,.news-grid{grid-template-columns:1fr}.story-card,.contact-panel{padding:24px}.contact-panel{grid-template-columns:1fr}.contact-actions{justify-content:stretch}.footer-row{display:grid}}
     @media (min-width:721px){.visual-cards{display:none}}
@@ -394,7 +399,7 @@ h1 span{color:var(--gold)}
         <div>
           <div class="eyebrow"><span class="dot"></span> <span data-i18n="hero.eyebrow">Menu digital vivant · QR durable · Sans commission</span></div>
           <h1 data-i18n="hero.title">Le menu digital qui fait <span>évoluer votre restaurant</span></h1>
-          <p class="hero-text" data-i18n="hero.text">TapCarta simplifie votre quotidien et améliore l’expérience de vos clients : menu mobile, langue automatique, commande, réservation et suivi clair côté restaurateur.</p>
+          <p class="hero-text" data-i18n="hero.text">Vos clients gagnent en clarté, vous gagnez en efficacité.<br>TapCarta simplifie tout, du menu à la commande.</p>
           <div class="hero-actions">
             <a class="btn btn-primary" href="#offres" data-i18n="hero.primary">Découvrir nos offres</a>
             <a class="btn" href="demo/" data-i18n="hero.demo">Voir la démo</a>
@@ -649,7 +654,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.4.2</span></div>
+      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.4.3</span></div>
       <div class="footer-links"><a href="#" data-i18n="footer.legal">Mentions légales</a><a href="#" data-i18n="footer.terms">Conditions générales</a><a href="#" data-i18n="footer.privacy">Confidentialité</a><a href="#contact" data-i18n="footer.support">Support</a></div>
     </div>
 
@@ -672,7 +677,7 @@ h1 span{color:var(--gold)}
           'nav.activate': 'Activer mon établissement',
           'hero.eyebrow': 'Menu digital vivant · QR durable · Sans commission',
           'hero.title': 'Le menu digital qui fait <span>évoluer votre restaurant</span>',
-          'hero.text': 'TapCarta simplifie votre quotidien et améliore l’expérience de vos clients : menu mobile, langue automatique, commande, réservation et suivi clair côté restaurateur.',
+          'hero.text': 'Vos clients gagnent en clarté, vous gagnez en efficacité.<br>TapCarta simplifie tout, du menu à la commande.',
           'hero.primary': 'Découvrir nos offres',
           'hero.demo': 'Voir la démo',
           'hero.trust1': 'Activation rapide',
@@ -824,7 +829,7 @@ h1 span{color:var(--gold)}
           'nav.activate': 'Activar mi establecimiento',
           'hero.eyebrow': 'Menú digital vivo · QR duradero · Sin comisión',
           'hero.title': 'El menú digital que hace <span>evolucionar su restaurante</span>',
-          'hero.text': 'TapCarta simplifica su día a día y mejora la experiencia de sus clientes: menú móvil, idioma automático, pedidos, reservas y seguimiento claro para el restaurante.',
+          'hero.text': 'Sus clientes ganan claridad, usted gana eficiencia.<br>TapCarta simplifica todo, del menú al pedido.',
           'hero.primary': 'Ver nuestras ofertas',
           'hero.demo': 'Ver la demo',
           'hero.trust1': 'Activación rápida',
@@ -976,7 +981,7 @@ h1 span{color:var(--gold)}
           'nav.activate': 'Activate my venue',
           'hero.eyebrow': 'Living digital menu · Durable QR · No commission',
           'hero.title': 'The digital menu that helps <span>your restaurant evolve</span>',
-          'hero.text': 'TapCarta simplifies daily operations and improves your guests’ experience: mobile menu, automatic language, orders, reservations and clear restaurant-side tracking.',
+          'hero.text': 'Your guests get clarity, you gain efficiency.<br>TapCarta simplifies everything, from menu to order.',
           'hero.primary': 'Discover our plans',
           'hero.demo': 'View the demo',
           'hero.trust1': 'Fast activation',
@@ -1128,7 +1133,7 @@ h1 span{color:var(--gold)}
           'nav.activate': 'Mijn zaak activeren',
           'hero.eyebrow': 'Levend digitaal menu · Duurzame QR · Geen commissie',
           'hero.title': 'Het digitale menu dat <span>uw restaurant laat evolueren</span>',
-          'hero.text': 'TapCarta vereenvoudigt uw dagelijkse werking en verbetert de ervaring van uw klanten: mobiel menu, automatische taal, bestellingen, reservaties en duidelijke opvolging voor het restaurant.',
+          'hero.text': 'Uw klanten krijgen meer duidelijkheid, u wint aan efficiëntie.<br>TapCarta vereenvoudigt alles, van menu tot bestelling.',
           'hero.primary': 'Onze formules bekijken',
           'hero.demo': 'Demo bekijken',
           'hero.trust1': 'Snelle activatie',
@@ -1297,6 +1302,25 @@ h1 span{color:var(--gold)}
       });
 
       applyLang(getInitialLang());
+
+      const revealTargets = document.querySelectorAll('.panel, .feature-card, .pricing-card, .proof-card, .step-card, .news-card, .story-card, .demo-card, .contact-panel');
+      if ('IntersectionObserver' in window) {
+        const revealObserver = new IntersectionObserver((entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            entry.target.classList.add('reveal-visible');
+            revealObserver.unobserve(entry.target);
+          });
+        }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+
+        revealTargets.forEach((el, index) => {
+          el.classList.add('reveal-ready');
+          el.style.transitionDelay = `${Math.min(index % 4, 3) * 70}ms`;
+          revealObserver.observe(el);
+        });
+      } else {
+        revealTargets.forEach((el) => el.classList.add('reveal-visible'));
+      }
 
       const links = [...document.querySelectorAll('.nav-links a[href^="#"]')];
       const sections = links.map(link => document.querySelector(link.getAttribute('href'))).filter(Boolean);
