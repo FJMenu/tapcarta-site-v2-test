@@ -526,12 +526,13 @@
 
       const needs = Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(input=>input.value);
 
-      let recommendedOffer = selectedOffer.value;
+      let recommendedOffer = 'needs_advice';
       let messageKey = 'advice';
       let showMaxNotice = false;
 
       if(needs.length === 0){
-        messageKey = selectedOffer.value === 'light' ? 'light' : selectedOffer.value === 'standard' ? 'standard' : selectedOffer.value === 'plus' ? 'plus' : selectedOffer.value === 'max_soon' ? 'max' : 'empty';
+        recommendedOffer = 'needs_advice';
+        messageKey = 'empty';
       }
       else if(needs.includes('reviews') || needs.includes('translation')){
         recommendedOffer = 'plus';
@@ -545,10 +546,6 @@
       else if(needs.includes('digital_menu') || needs.includes('website')){
         recommendedOffer = 'standard';
         messageKey = 'standard';
-      }
-      else{
-        recommendedOffer = 'needs_advice';
-        messageKey = 'advice';
       }
 
       selectedOffer.value = recommendedOffer;
