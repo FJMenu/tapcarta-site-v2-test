@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>TapCarta — Rejoindre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+
+  <!-- NAV SIMPLE (temporaire) -->
+  <header>
+    <a href="index.html">TapCarta</a>
+  </header>
+
+  <!-- CONTENU PRINCIPAL -->
+  <main style="padding:20px; max-width:600px; margin:auto;">
+
+    <h1 data-i18n="join.title">
+      Bienvenue dans la communauté TapCarta
+    </h1>
+
+    <p data-i18n="join.intro">
+      Complétez quelques informations pour créer votre espace TapCarta et commencer à préparer votre présence.
+    </p>
+
+    <!-- FORMULAIRE -->
+    <form>
+
+      <h3 data-i18n="join.section.identity">Informations de contact</h3>
+
+      <input type="text" placeholder="Nom et prénom" required>
+      <input type="email" placeholder="Email" required>
+      <input type="tel" placeholder="Téléphone / WhatsApp" required>
+
+      <h3 data-i18n="join.section.restaurant">Établissement</h3>
+
+      <input type="text" placeholder="Nom du restaurant" required>
+      <input type="text" placeholder="Ville" required>
+      <input type="text" placeholder="Pays" required>
+
+      <h3 data-i18n="join.section.offer">Offre</h3>
+
+      <select>
+        <option>Light</option>
+        <option>Standard</option>
+        <option>Standard + Web</option>
+        <option>Je ne sais pas encore</option>
+      </select>
+
+      <h3 data-i18n="join.section.languages">Langues</h3>
+
+      <input type="text" placeholder="Langue principale">
+      <input type="text" placeholder="Langues souhaitées (optionnel)">
+
+      <h3 data-i18n="join.section.legal">Validation</h3>
+
+      <label>
+        <input type="checkbox" required>
+        <span data-i18n="join.check.authorized">
+          Je déclare être autorisé à engager l’établissement.
+        </span>
+      </label>
+
+      <label>
+        <input type="checkbox" required>
+        <span data-i18n="join.check.data">
+          Je confirme que les informations transmises sont exactes.
+        </span>
+      </label>
+
+      <br><br>
+
+      <button type="submit" data-i18n="join.submit">
+        Créer mon espace TapCarta
+      </button>
+
+    </form>
+
+  </main>
+
+</body>
+</html>
