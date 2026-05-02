@@ -649,7 +649,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.4.1</span></div>
+      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.4.2</span></div>
       <div class="footer-links"><a href="#" data-i18n="footer.legal">Mentions légales</a><a href="#" data-i18n="footer.terms">Conditions générales</a><a href="#" data-i18n="footer.privacy">Confidentialité</a><a href="#contact" data-i18n="footer.support">Support</a></div>
     </div>
 
@@ -1271,15 +1271,8 @@ h1 span{color:var(--gold)}
       };
 
       const getInitialLang = () => {
-        try {
-          const saved = localStorage.getItem(STORAGE_KEY);
-          if (SUPPORTED_LANGS.includes(saved)) return saved;
-        } catch (error) {
-          // localStorage is only used for language comfort.
-        }
-
-        const browserLang = (navigator.language || 'fr').slice(0, 2).toLowerCase();
-        return SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'fr';
+        const browserLang = (navigator.language || 'es').slice(0, 2).toLowerCase();
+        return SUPPORTED_LANGS.includes(browserLang) ? browserLang : 'es';
       };
 
       const applyLang = (lang) => {
@@ -1295,11 +1288,8 @@ h1 span{color:var(--gold)}
           btn.classList.toggle('active', btn.getAttribute('data-lang-btn') === lang);
         });
 
-        try {
-          localStorage.setItem(STORAGE_KEY, lang);
-        } catch (error) {
-          // localStorage is only used for language comfort.
-        }
+        // La langue du site vitrine est redétectée à chaque chargement.
+        // Aucun stockage local volontaire : un lien partagé s’ouvre dans la langue du visiteur.
       };
 
       document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
