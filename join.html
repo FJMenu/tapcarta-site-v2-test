@@ -356,7 +356,24 @@
 
             <section class="section">
               <h3 class="section-title"><span class="section-icon">5</span><span data-i18n="section.offer">Offre souhaitée</span></h3>
-              <label class="field"><span data-i18n="field.offer">Choix actuel</span><select name="selected_offer"><option value="light">Light</option><option value="standard">Standard</option><option value="standard_web">Standard + Web</option><option value="max_soon" data-i18n="offer.max">Max — prochainement</option><option value="needs_advice" data-i18n="offer.advice">Je souhaite être conseillé</option></select></label>
+              <label class="field">
+                <span data-i18n="field.offer">Choix actuel</span>
+                <select name="selected_offer" id="selectedOffer">
+                  <option value="light">Light</option>
+                  <option value="standard">Standard</option>
+                  <option value="plus">Plus</option>
+                  <option value="max_soon" data-i18n="offer.max">Max — prochainement</option>
+                  <option value="needs_advice" data-i18n="offer.advice">Je souhaite être conseillé</option>
+                </select>
+              </label>
+
+              <div id="offerSummary" class="hint" style="margin-top:14px;padding:14px;border-radius:16px;border:1px solid rgba(255,197,27,.24);background:rgba(255,197,27,.075);">
+                <strong id="offerSummaryTitle">Offre conseillée :</strong>
+                <span id="offerSummaryText">Sélectionnez vos besoins pour obtenir une recommandation.</span>
+              </div>
+
+              <p id="maxNotice" class="hint" style="display:none;margin-top:12px;padding:14px;border-radius:16px;border:1px solid rgba(255,197,27,.34);background:rgba(255,197,27,.10);color:#ffe38a;font-weight:800;"></p>
+
               <p class="hint" data-i18n="hint.advice">Si vous souhaitez être conseillé, nous vous orienterons vers l’offre la plus adaptée.</p>
             </section>
 
@@ -452,8 +469,108 @@
       document.querySelectorAll('.lang-btn').forEach(btn=>btn.classList.toggle('active', btn.dataset.lang === lang));
     }
 
-    document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>applyLang(btn.dataset.lang)));
-    applyLang(detectLanguage());
+    let activeLang = detectLanguage();
+
+    const offerMessages = {
+      fr:{
+        title:'Offre conseillée :',
+        empty:'Sélectionnez vos besoins pour obtenir une recommandation.',
+        light:'Light — gratuit : présence simple avec localisation, horaires et bouton appel.',
+        standard:'Standard — 30 € HTVA / mois : menu digital complet, multilingue, QR durable et site web simple inclus.',
+        plus:'Plus — 45 € HTVA / mois : Standard + commande, réservation, TapCarta Resto et suivi des demandes.',
+        advice:'Conseil personnalisé : nous vous orienterons vers la formule la plus adaptée.',
+        max:'Max est en cours de développement / test. Prenez TapCarta Plus maintenant et vous pourrez passer à Max dès son lancement.'
+      },
+      es:{
+        title:'Oferta recomendada:',
+        empty:'Seleccione sus necesidades para obtener una recomendación.',
+        light:'Light — gratuito: presencia simple con localización, horarios y botón de llamada.',
+        standard:'Standard — 30 € HTVA / mes: menú digital completo, multilingüe, QR duradero y sitio web simple incluido.',
+        plus:'Plus — 45 € HTVA / mes: Standard + pedidos, reservas, TapCarta Resto y seguimiento de solicitudes.',
+        advice:'Asesoramiento personalizado: le orientaremos hacia la fórmula más adecuada.',
+        max:'Max está en desarrollo / prueba. Contrate TapCarta Plus ahora y podrá pasar a Max desde su lanzamiento.'
+      },
+      en:{
+        title:'Recommended offer:',
+        empty:'Select your needs to get a recommendation.',
+        light:'Light — free: simple presence with location, opening hours and call button.',
+        standard:'Standard — €30 excl. VAT / month: full digital menu, multilingual display, durable QR and simple website included.',
+        plus:'Plus — €45 excl. VAT / month: Standard + ordering, booking, TapCarta Resto and request tracking.',
+        advice:'Personalized advice: we will guide you toward the most suitable plan.',
+        max:'Max is currently in development / testing. Choose TapCarta Plus now and you will be able to move to Max as soon as it launches.'
+      },
+      nl:{
+        title:'Aanbevolen formule:',
+        empty:'Selecteer uw behoeften om een aanbeveling te krijgen.',
+        light:'Light — gratis: eenvoudige aanwezigheid met locatie, openingsuren en belknop.',
+        standard:'Standard — 30 € excl. btw / maand: volledig digitaal menu, meertalig, duurzame QR en eenvoudige website inbegrepen.',
+        plus:'Plus — 45 € excl. btw / maand: Standard + bestellen, reserveren, TapCarta Resto en opvolging van aanvragen.',
+        advice:'Persoonlijk advies: wij begeleiden u naar de meest geschikte formule.',
+        max:'Max is in ontwikkeling / testfase. Kies nu TapCarta Plus en u kunt overstappen naar Max zodra het gelanceerd wordt.'
+      }
+    };
+
+    function updateOfferFromNeeds(){
+      const selectedOffer = document.getElementById('selectedOffer');
+      const offerSummaryTitle = document.getElementById('offerSummaryTitle');
+      const offerSummaryText = document.getElementById('offerSummaryText');
+      const maxNotice = document.getElementById('maxNotice');
+      const dict = offerMessages[activeLang] || offerMessages.es;
+
+      const needs = Array.from(document.querySelectorAll('input[name="needs"]:checked')).map(input=>input.value);
+
+      let recommendedOffer = selectedOffer.value;
+      let messageKey = 'advice';
+      let showMaxNotice = false;
+
+      if(needs.length === 0){
+        messageKey = selectedOffer.value === 'light' ? 'light' : selectedOffer.value === 'standard' ? 'standard' : selectedOffer.value === 'plus' ? 'plus' : selectedOffer.value === 'max_soon' ? 'max' : 'empty';
+      }
+      else if(needs.includes('reviews')){
+        recommendedOffer = 'plus';
+        messageKey = 'plus';
+        showMaxNotice = true;
+      }
+      else if(needs.includes('ordering') || needs.includes('booking')){
+        recommendedOffer = 'plus';
+        messageKey = 'plus';
+      }
+      else if(needs.includes('digital_menu') || needs.includes('website') || needs.includes('translation')){
+        recommendedOffer = 'standard';
+        messageKey = 'standard';
+      }
+      else{
+        recommendedOffer = 'needs_advice';
+        messageKey = 'advice';
+      }
+
+      selectedOffer.value = recommendedOffer;
+      offerSummaryTitle.textContent = dict.title;
+      offerSummaryText.textContent = dict[messageKey];
+
+      if(showMaxNotice){
+        maxNotice.textContent = dict.max;
+        maxNotice.style.display = 'block';
+      }else{
+        maxNotice.textContent = '';
+        maxNotice.style.display = 'none';
+      }
+    }
+
+    document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{
+      activeLang = btn.dataset.lang;
+      applyLang(activeLang);
+      updateOfferFromNeeds();
+    }));
+
+    applyLang(activeLang);
+    updateOfferFromNeeds();
+
+    document.querySelectorAll('input[name="needs"]').forEach(input=>{
+      input.addEventListener('change', updateOfferFromNeeds);
+    });
+
+    document.getElementById('selectedOffer').addEventListener('change', updateOfferFromNeeds);
 
     document.getElementById('tapcartaJoinForm').addEventListener('submit', function(event){
       event.preventDefault();
