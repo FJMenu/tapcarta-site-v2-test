@@ -495,6 +495,7 @@ h1 span{color:var(--gold)}
               <li><span class="check">✓</span> <span data-i18n="offers.light.item4">Présence minimale</span></li>
               <li><span class="check">✓</span> <span data-i18n="offers.light.item5">Sans menu ni commande</span></li>
             </ul>
+            <a class="btn" href="join.html?pack=light" data-i18n="offers.light.cta">Je choisis Light</a>
           </article>
 
           <article class="panel pricing-card">
@@ -509,7 +510,7 @@ h1 span{color:var(--gold)}
               <li><span class="check">✓</span> <span data-i18n="offers.standard.item4">Site web simple</span></li>
               <li><span class="check">✓</span> <span data-i18n="offers.standard.item5">Appel, itinéraire, WhatsApp</span></li>
             </ul>
-            <a class="btn" href="join.html" data-i18n="offers.standard.cta">Choisir Standard</a>
+            <a class="btn" href="join.html?pack=standard" data-i18n="offers.standard.cta">Je choisis Standard</a>
           </article>
 
           <article class="panel pricing-card reco">
@@ -526,7 +527,7 @@ h1 span{color:var(--gold)}
               <li><span class="check">✓</span> <span data-i18n="offers.plus.item5">Suivi des demandes</span></li>
               <li><span class="check">✓</span> <span data-i18n="offers.plus.item6">Sans commission</span></li>
             </ul>
-            <a class="btn btn-primary" href="join.html" data-i18n="offers.plus.cta">Choisir Plus</a>
+            <a class="btn btn-primary" href="join.html?pack=plus" data-i18n="offers.plus.cta">Je choisis Plus</a>
           </article>
 
           <article class="panel pricing-card max-pricing-card">
@@ -542,26 +543,17 @@ h1 span{color:var(--gold)}
               <li><span class="check">✓</span> <span data-i18n="offers.max.item4">Aide au contenu</span></li>
               <li><span class="check">✓</span> <span data-i18n="offers.max.item5">Évolutions progressives</span></li>
             </ul>
+            <button class="btn" type="button" disabled data-i18n="offers.max.cta">Max — Prochainement</button>
           </article>
+        </div>
 
-          <article class="panel pricing-card compare-card">
+        <div class="panel compare-card compare-separate" id="comparatif">
+          <div>
             <div class="plan-kicker" data-i18n="offers.compare.kicker">Besoin d’aide ?</div>
-            <div class="plan-title" data-i18n="offers.compare.title">Comparer les offres</div>
-            <p data-i18n="offers.compare.text">Trouvez le pack qui correspond à votre restaurant et à votre rythme de départ.</p>
-
-            <div class="compare-mini">
-              <span>Light</span>
-              <strong data-i18n="offers.light.price">Gratuit</strong>
-              <span>Standard</span>
-              <strong>30€</strong>
-              <span>Plus</span>
-              <strong>45€</strong>
-              <span>Max</span>
-              <strong data-i18n="offers.max.soon">Prochainement</strong>
-            </div>
-
-            <a class="btn" href="join.html" data-i18n="offers.compare.cta">Je rejoins TapCarta →</a>
-          </article>
+            <h3 data-i18n="offers.compare.title">Comparer les offres</h3>
+            <p data-i18n="offers.compare.text">Consultez un tableau simple pour choisir le pack adapté avant de remplir votre demande.</p>
+          </div>
+          <a class="btn" href="#comparatif-detail" data-i18n="offers.compare.cta">Comparer les offres</a>
         </div>
       </div>
     </section>
