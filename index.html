@@ -343,21 +343,36 @@ h1 span{color:var(--gold)}
       align-items:center;
       justify-content:space-between;
       gap:18px;
-      border-style:dashed;
+      border:1px solid rgba(255,197,27,.28);
       background:
-        radial-gradient(circle at top left, rgba(245,183,0,.12), transparent 34%),
-        rgba(255,255,255,.035);
+        radial-gradient(circle at top left, rgba(255,197,27,.18), transparent 36%),
+        linear-gradient(145deg, rgba(25,20,9,.94), rgba(7,8,10,.92));
+      box-shadow:
+        0 24px 80px rgba(0,0,0,.42),
+        0 0 32px rgba(255,197,27,.08),
+        inset 0 1px 0 rgba(255,255,255,.08);
+      transition:transform .22s ease, border-color .22s ease, box-shadow .22s ease;
+    }
+
+    .compare-separate:hover{
+      transform:translateY(-4px);
+      border-color:rgba(255,197,27,.48);
+      box-shadow:
+        0 30px 95px rgba(0,0,0,.48),
+        0 0 42px rgba(255,197,27,.14),
+        inset 0 1px 0 rgba(255,255,255,.1);
     }
 
     .compare-separate h3{
       margin:4px 0 8px;
       font-size:22px;
+      color:var(--gold);
     }
 
     .compare-separate p{
       margin:0;
       max-width:760px;
-      color:var(--muted);
+      color:#d7d8dc;
     }
 
     @media (max-width:720px){
@@ -581,21 +596,14 @@ h1 span{color:var(--gold)}
           </article>
         </div>
 
-<div class="compare-premium" id="comparatif">
-  <div class="compare-premium-left">
-    <div class="plan-kicker">Besoin d’aide ?</div>
-    <h3>Comparer les offres</h3>
-    <p>Consultez un tableau simple pour choisir le pack adapté avant de remplir votre demande.</p>
+<div class="panel compare-card compare-separate" id="comparatif">
+  <div>
+    <div class="plan-kicker" data-i18n="offers.compare.kicker">Besoin d’aide ?</div>
+    <h3 data-i18n="offers.compare.title">Comparer les offres</h3>
+    <p data-i18n="offers.compare.text">Trouvez le pack qui correspond à votre restaurant et à votre rythme de départ.</p>
   </div>
 
-  <div class="compare-premium-right">
-    <a class="btn btn-primary" href="#comparatif-detail">Comparer les offres</a>
-  </div>
-</div>
-
-  <div class="compare-premium-right">
-    <a class="btn btn-primary" href="#comparatif-detail">Comparer les offres</a>
-  </div>
+  <a class="btn btn-primary" href="#comparatif-detail" data-i18n="offers.compare.cta">Je rejoins TapCarta →</a>
 </div>
       </div>
     </section>
@@ -686,7 +694,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.5.14</span></div>
+      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.1.5.15</span></div>
       <div class="footer-links"><a href="#" data-i18n="footer.legal">Mentions légales</a><a href="#" data-i18n="footer.terms">Conditions générales</a><a href="privacy.html" data-i18n="footer.privacy"></a><a href="#contact" data-i18n="footer.support">Support</a></div>
     </div>
 
