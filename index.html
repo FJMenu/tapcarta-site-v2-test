@@ -482,55 +482,81 @@ h1 span{color:var(--gold)}
           <h2 data-i18n="offers.title">Nos <span>offres</span> adaptées à vos besoins</h2>
           <p data-i18n="offers.text">Une entrée simple, un pack complet, et une évolution Max annoncée clairement comme prochaine étape.</p>
         </div>
-    .compare-mini{
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:8px 14px;
-      margin:18px 0;
-      padding:16px;
-      border-radius:18px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
-      font-size:14px;
-    }
+        <div class="pricing-grid premium-pricing">
+          <article class="panel pricing-card">
+            <div class="plan-kicker" data-i18n="offers.light.kicker">Présence essentielle</div>
+            <div class="plan-title">Light</div>
+            <div class="price" data-i18n="offers.light.price">Gratuit</div>
+            <p class="plan-desc" data-i18n="offers.light.desc">Une présence minimale pour afficher votre établissement et permettre un contact direct.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> <span data-i18n="offers.light.item1">Localisation</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.light.item2">Appel ou WhatsApp</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.light.item3">Contact direct</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.light.item4">Présence minimale</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.light.item5">Sans menu ni commande</span></li>
+            </ul>
+            <a class="btn" href="join.html?pack=light" data-i18n="offers.light.cta">Je choisis Light</a>
+          </article>
 
-    .compare-mini strong{
-      color:var(--yellow);
-    }
+          <article class="panel pricing-card">
+            <div class="plan-kicker" data-i18n="offers.standard.kicker">Menu digital</div>
+            <div class="plan-title">Standard</div>
+            <div class="price">30€ <small data-i18n="offers.price.month">HTVA / mois</small></div>
+            <p class="plan-desc" data-i18n="offers.standard.desc">Le socle propre pour remplacer une carte papier ou un QR basique.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> <span data-i18n="offers.standard.item1">Menu digital complet</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.standard.item2">QR Code durable</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.standard.item3">Langue automatique</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.standard.item4">Site web simple</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.standard.item5">Appel, itinéraire, WhatsApp</span></li>
+            </ul>
+            <a class="btn" href="join.html?pack=standard" data-i18n="offers.standard.cta">Je choisis Standard</a>
+          </article>
 
-    .compare-separate{
-      margin-top:22px;
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:18px;
-      border-style:dashed;
-      background:
-        radial-gradient(circle at top left, rgba(245,183,0,.12), transparent 34%),
-        rgba(255,255,255,.035);
-    }
+          <article class="panel pricing-card reco">
+            <div class="ribbon" data-i18n="offers.plus.ribbon">Pack recommandé</div>
+            <div class="plan-kicker" data-i18n="offers.plus.kicker">Le plus complet aujourd’hui</div>
+            <div class="plan-title">Plus</div>
+            <div class="price">45€ <small data-i18n="offers.price.month">HTVA / mois</small></div>
+            <p class="plan-desc" data-i18n="offers.plus.desc">Menu, réservations, commandes et interface restaurant dans un seul écosystème.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item1">Tout le pack Standard</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item2">Commande</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item3">Réservation</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item4">TapCarta Resto</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item5">Suivi des demandes</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.plus.item6">Sans commission</span></li>
+            </ul>
+            <a class="btn btn-primary" href="join.html?pack=plus" data-i18n="offers.plus.cta">Je choisis Plus</a>
+          </article>
 
-    .compare-separate h3{
-      margin:4px 0 8px;
-      font-size:22px;
-    }
+          <article class="panel pricing-card max-pricing-card">
+            <div class="max-mini-face">Max</div>
+            <div class="plan-kicker" data-i18n="offers.max.kicker">Assistant TapCarta</div>
+            <div class="plan-title">Max</div>
+            <div class="soon" data-i18n="offers.max.soon">Prochainement</div>
+            <p class="plan-desc" data-i18n="offers.max.desc">Le visage de TapCarta aujourd’hui, et demain un assistant IA utile pour accompagner le restaurant.</p>
+            <ul class="plan-list">
+              <li><span class="check">✓</span> <span data-i18n="offers.max.item1">Assistance IA en préparation</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.max.item2">Traductions mieux cadrées</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.max.item3">Descriptions optimisées</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.max.item4">Aide au contenu</span></li>
+              <li><span class="check">✓</span> <span data-i18n="offers.max.item5">Évolutions progressives</span></li>
+            </ul>
+            <button class="btn" type="button" disabled data-i18n="offers.max.cta">Max — Prochainement</button>
+          </article>
+        </div>
 
-    .compare-separate p{
-      margin:0;
-      max-width:760px;
-      color:var(--muted);
-    }
-
-    @media (max-width:720px){
-      .compare-separate{
-        flex-direction:column;
-        align-items:flex-start;
-      }
-
-      .compare-separate .btn{
-        width:100%;
-      }
-    }
+        <div class="panel compare-card compare-separate" id="comparatif">
+          <div>
+            <div class="plan-kicker" data-i18n="offers.compare.kicker">Besoin d’aide ?</div>
+            <h3 data-i18n="offers.compare.title">Comparer les offres</h3>
+            <p data-i18n="offers.compare.text">Consultez un tableau simple pour choisir le pack adapté avant de remplir votre demande.</p>
+          </div>
+          <a class="btn" href="#comparatif-detail" data-i18n="offers.compare.cta">Comparer les offres</a>
+        </div>
+      </div>
+    </section>
 
     <section id="resto">
       <div class="container split">
