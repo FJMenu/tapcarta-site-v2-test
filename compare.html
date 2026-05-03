@@ -108,7 +108,9 @@
     gap:22px;
     max-width:100%;
     overflow:hidden;
-      .max-showcase-visual,
+  }
+
+  .max-showcase-visual,
   .max-showcase-visual img{
     max-width:100%;
     overflow:hidden;
@@ -263,10 +265,10 @@ main > section:nth-of-type(5){animation-delay:.30s}
         <thead>
           <tr>
             <th data-i18n="col.feature">Fonction</th>
-            <th>Light<span class="price">0 €</span><span class="note">/ mois</span></th>
-            <th>Standard<span class="price">30 €</span><span class="note">/ mois HTVA</span></th>
-            <th class="highlight">Plus<span class="price">45 €</span><span class="note">/ mois HTVA</span></th>
-            <th>Max<span class="price">Bientôt</span><span class="note">Prix en préparation</span></th>
+            <th>Light<span class="price">0 €</span><span class="note" data-i18n="price.month.simple">/ mois</span></th>
+            <th>Standard<span class="price">30 €</span><span class="note" data-i18n="price.month">/ mois HTVA</span></th>
+            <th class="highlight">Plus<span class="price">45 €</span><span class="note" data-i18n="price.month">/ mois HTVA</span></th>
+            <th>Max<span class="price" data-i18n="price.soon.short">Bientôt</span><span class="note" data-i18n="price.soon">Prix en préparation</span></th>
           </tr>
         </thead>
         <tbody>
@@ -347,7 +349,7 @@ main > section:nth-of-type(5){animation-delay:.30s}
     <section>
       <div class="container panel cta-band">
         <div><h2 data-i18n="final.title">Le bon choix : démarrer avec une offre utile, pas seulement visible.</h2><p data-i18n="final.text">TapCarta est pensé pour évoluer sans changer votre QR. Vous pouvez commencer proprement, puis activer davantage de fonctions selon vos besoins et selon votre contrat.</p></div>
-        <div class="cta-actions"><a class="btn btn-primary" href="join.html?pack=plus" data-i18n="final.plus">Je choisis Plus</a><a class="btn" href="join.html?pack=standard" data-i18n="final.standard">Je choisis Standard</a><a class="btn btn-dark" href="join.html" data-i18n="final.question">J’ai une question</a></div>
+        <div class="cta-actions"><a class="btn btn-primary" href="join.html?pack=plus" data-i18n="final.plus">Je choisis Plus</a><a class="btn" href="join.html?pack=standard" data-i18n="final.standard">Je choisis Standard</a><!-- bouton "question" temporairement désactivé --></div>
       </div>
     </section>
   </main>
@@ -369,6 +371,8 @@ const dict={
         'table.text':'Light garde votre QR actif en version minimale. Standard rend votre menu vraiment exploitable. Plus est le meilleur équilibre pour vendre, réserver et rassurer. Max sera activable dès son lancement.',
         'col.feature':'Fonction',
         'price.month':'/ mois HTVA',
+        'price.month.simple':'/ mois',
+        'price.soon.short':'Bientôt',
         'price.soon':'Prix en préparation',
         'f.qr':'QR durable conservé',
         'f.light':'Nom, localisation, appel/contact',
@@ -431,6 +435,8 @@ const dict={
         'table.text':'Light mantiene su QR activo en versión mínima. Standard convierte su menú en una herramienta real. Plus es el mejor equilibrio para vender, reservar y dar confianza. Max podrá activarse desde su lanzamiento.',
         'col.feature':'Función',
         'price.month':'/ mes + IVA',
+        'price.month.simple':'/ mes',
+        'price.soon.short':'Próximamente',
         'price.soon':'Precio en preparación',
         'f.qr':'QR duradero conservado',
         'f.light':'Nombre, ubicación, llamada/contacto',
@@ -493,6 +499,8 @@ const dict={
         'table.text':'Light keeps your QR active in a minimal version. Standard makes your menu truly usable. Plus is the best balance for selling, booking and reassuring customers. Max can be activated as soon as it launches.',
         'col.feature':'Feature',
         'price.month':'/ month excl. VAT',
+        'price.month.simple':'/ month',
+        'price.soon.short':'Coming soon',
         'price.soon':'Price in preparation',
         'f.qr':'Durable QR preserved',
         'f.light':'Name, location, call/contact',
@@ -555,6 +563,8 @@ const dict={
         'table.text':'Light houdt uw QR actief in een minimale versie. Standard maakt uw menu echt bruikbaar. Plus is de beste balans voor verkopen, reserveren en vertrouwen. Max kan worden geactiveerd zodra het wordt gelanceerd.',
         'col.feature':'Functie',
         'price.month':'/ maand excl. btw',
+        'price.month.simple':'/ maand',
+        'price.soon.short':'Binnenkort',
         'price.soon':'Prijs in voorbereiding',
         'f.qr':'Duurzame QR behouden',
         'f.light':'Naam, locatie, bellen/contact',
