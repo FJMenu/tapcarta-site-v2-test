@@ -742,7 +742,7 @@ h1 span{color:var(--gold)}
 
   <footer>
     <div class="container footer-row">
-      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.3.1.1</span></div>
+      <div>© 2026 TapCarta — <span data-i18n="footer.rights">Tous droits réservés</span> <span class="version">· Site V2.3.1.2</span></div>
       <div class="footer-links"><a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a><a href="conditions.html" data-i18n="footer.terms">Conditions générales</a><a href="privacy.html" data-i18n="footer.privacy">Confidentialité</a><a href="#contact" data-i18n="footer.support">Support</a></div>
     </div>
   </footer>
@@ -1430,23 +1430,54 @@ h1 span{color:var(--gold)}
       const shareButton = document.querySelector('.video-share-btn');
 
       if (shareButton) {
-        shareButton.addEventListener('click', async () => {
-          const shareUrl = `${window.location.origin}${window.location.pathname}#video`;
-          const shareTitle = 'TapCarta';
-          const shareText = 'Découvrez TapCarta en vidéo';
 
-          if (navigator.share) {
-            await navigator.share({
-              title: shareTitle,
-              text: shareText,
-              url: shareUrl
-            });
-            return;
+        const isMobileDevice = /Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent);
+
+        if (!isMobileDevice) {
+          shareButton.innerHTML = 'Copier le lien de la vidéo';
+        }
+
+        shareButton.addEventListener('click', async () => {
+
+          const shareUrl = `${window.location.origin}${window.location.pathname}#video`;
+
+          if (isMobileDevice && navigator.share) {
+
+            try {
+              await navigator.share({
+                title: 'TapCarta',
+                text: 'Découvrez TapCarta en vidéo',
+                url: shareUrl
+              });
+
+              return;
+
+            } catch (error) {
+              return;
+            }
           }
 
-          await navigator.clipboard.writeText(shareUrl);
+          try {
+
+            await navigator.clipboard.writeText(shareUrl);
+
+          } catch (error) {
+
+            const tempInput = document.createElement('input');
+
+            tempInput.value = shareUrl;
+
+            document.body.appendChild(tempInput);
+
+            tempInput.select();
+
+            document.execCommand('copy');
+
+            document.body.removeChild(tempInput);
+          }
 
           const originalText = shareButton.innerHTML;
+
           shareButton.innerHTML = 'Lien copié';
 
           setTimeout(() => {
