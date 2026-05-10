@@ -195,7 +195,13 @@
     }
     option{color:#111;background:#fff}
     textarea{min-height:116px;resize:vertical;line-height:1.45}
-    input:focus,select:focus,textarea:focus{border-color:rgba(255,197,27,.62);box-shadow:0 0 0 4px rgba(255,197,27,.10);background:rgba(255,255,255,.085)}
+    input.field-error,
+select.field-error,
+textarea.field-error{
+  border-color:rgba(255,80,80,.85)!important;
+  box-shadow:0 0 0 4px rgba(255,80,80,.14)!important;
+  background:rgba(255,80,80,.08)!important;
+}
     input::placeholder,textarea::placeholder{color:rgba(245,245,242,.45)}
     .hint{color:var(--muted);font-size:13px;line-height:1.5;margin:10px 0 0}
     .hint strong{color:var(--gold-3)}
@@ -633,6 +639,14 @@
     }));
 
     applyLang(activeLang);
+
+    window.addEventListener('load', () => {
+      const formStart = document.getElementById('join-form');
+      if(formStart){
+        formStart.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    });
+
     updateOfferFromNeeds();
 
     document.querySelectorAll('input[name="needs"]').forEach(input=>{
@@ -649,7 +663,20 @@
 
       const form = event.target;
       const submitButton = form.querySelector('button[type="submit"]');
-      const formData = new FormData(form);
+      form.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
+
+      const requiredFields = Array.from(form.querySelectorAll('[required]'));
+      const firstInvalidField = requiredFields.find(field => {
+        if(field.type === 'checkbox') return !field.checked;
+        return !field.value || !field.value.toString().trim();
+      });
+
+      if(firstInvalidField){
+        firstInvalidField.classList.add('field-error');
+        firstInvalidField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        firstInvalidField.focus({ preventScroll: true });
+        return;
+      }
 
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
       const selectedOffer = (formData.get('selected_offer') || '').toString();
