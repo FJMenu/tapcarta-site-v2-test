@@ -359,10 +359,10 @@
               <label class="field">
                 <span data-i18n="field.offer">Choix actuel</span>
                 <select name="selected_offer" id="selectedOffer">
-                  <option value="light">Light</option>
-                  <option value="standard">Standard</option>
+                  <option value="standard" selected>Standard</option>
                   <option value="plus">Plus</option>
-                  <option value="max_soon" data-i18n="offer.max">Max — prochainement</option>
+                  <option value="light">Light</option>
+                  <option value="max" data-i18n="offer.max">Max — prochainement</option>
                   <option value="needs_advice" data-i18n="offer.advice">Je souhaite être conseillé</option>
                 </select>
               </label>
@@ -588,7 +588,7 @@
       const hasFutureNeed = needs.includes('reviews') || needs.includes('translation');
 
       if(selectedValue === 'needs_advice') return 'advice';
-      if(selectedValue === 'max_soon') return 'max';
+      if(selectedValue === 'max') return 'max';
       if(hasFutureNeed && selectedValue !== 'max_soon') return 'max';
       if(selectedValue === 'light' && (hasMenuNeed || hasOperationalNeed || hasFutureNeed)) return 'lightMismatch';
       if(selectedValue === 'standard' && hasOperationalNeed) return 'standardMismatch';
@@ -616,7 +616,7 @@
 
       if(needs.length === 0 && !offerTouchedByUser){
         offerSummaryText.textContent = dict.empty;
-      }else if(selectedValue !== recommendedOffer && selectedValue !== 'needs_advice' && selectedValue !== 'max_soon'){
+      }else if(selectedValue !== recommendedOffer && selectedValue !== 'needs_advice' && selectedValue !== 'max'){
         offerSummaryText.textContent = (dict[messageKey] || dict[selectedValue]) + ' ' + dict.recommendationPrefix + (dict[recommendedOffer] || dict.advice);
       }else{
         offerSummaryText.textContent = dict[messageKey] || dict.empty;
@@ -655,7 +655,15 @@
       const selectedOffer = (formData.get('selected_offer') || 'light').toString();
       const preferredLanguage = (formData.get('preferred_language') || activeLang || 'fr').toString();
       const needs = formData.getAll('needs');
-      const languagesRequested = formData.getAll('languages_requested');
+      const extraLanguages = formData.getAll('extra_lang');
+
+const languagesRequested = [
+  'fr',
+  'es',
+  'en',
+  'nl',
+  ...extraLanguages
+];
       const restaurantId = crypto.randomUUID();
       const restaurantSlug = generateSlug(restaurantName);
 
