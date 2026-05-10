@@ -791,9 +791,15 @@ textarea.field-error{
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
       const selectedOffer = (formData.get('selected_offer') || '').toString();
 
-if (!selectedOffer) {
-  throw new Error('selected_offer_missing');
-}
+      if(!selectedOffer){
+        alert(
+          activeLang === 'es' ? 'Seleccione una oferta antes de continuar.' :
+          activeLang === 'en' ? 'Please select an offer before continuing.' :
+          activeLang === 'nl' ? 'Selecteer een formule voordat u verdergaat.' :
+          'Sélectionnez une offre avant de continuer.'
+        );
+        return;
+      }
       const preferredLanguage = (formData.get('preferred_language') || activeLang || 'fr').toString();
       const needs = formData.getAll('needs');
       const extraLanguages = formData.getAll('extra_lang');
