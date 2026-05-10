@@ -225,6 +225,7 @@ textarea.field-error{
     .submit-row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:2px}
     .submit-note{color:var(--muted);font-size:13px;line-height:1.45;max-width:520px}
     .success-box{display:none;margin-top:16px;border:1px solid rgba(126,225,140,.30);background:rgba(126,225,140,.08);border-radius:18px;padding:16px;color:#eaffee;font-weight:800;line-height:1.5}
+.success-box.show{display:block}
     .tapcarta-modal{
   position:fixed;
   inset:0;
@@ -944,7 +945,16 @@ const languagesRequested = [
 
       }catch(error){
         console.error('TapCarta join submit error:', error);
-        alert('Erreur lors de l’envoi de la demande. Merci de réessayer.');
+        showTapCartaModal(
+          activeLang === 'es' ? 'Error al enviar la solicitud. Inténtelo de nuevo.' :
+          activeLang === 'en' ? 'Error sending request. Please try again.' :
+          activeLang === 'nl' ? 'Fout bij het verzenden van de aanvraag. Probeer opnieuw.' :
+          'Erreur lors de l’envoi de la demande. Merci de réessayer.',
+          activeLang === 'es' ? 'Error de envío' :
+          activeLang === 'en' ? 'Sending error' :
+          activeLang === 'nl' ? 'Verzendfout' :
+          'Erreur d’envoi'
+        );
       }finally{
         if(submitButton){
           submitButton.disabled = false;
