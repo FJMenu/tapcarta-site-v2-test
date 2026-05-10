@@ -652,7 +652,11 @@
       const formData = new FormData(form);
 
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
-      const selectedOffer = (formData.get('selected_offer') || 'light').toString();
+      const selectedOffer = (formData.get('selected_offer') || '').toString();
+
+if (!selectedOffer) {
+  throw new Error('selected_offer_missing');
+}
       const preferredLanguage = (formData.get('preferred_language') || activeLang || 'fr').toString();
       const needs = formData.getAll('needs');
       const extraLanguages = formData.getAll('extra_lang');
@@ -706,7 +710,7 @@ const languagesRequested = [
             selected_offer: selectedOffer,
             needs: needs,
             languages_requested: languagesRequested,
-            message: (formData.get('message') || '').toString().trim(),
+            message: (formData.get('message_original') || '').toString().trim(),
             status: 'pending_review'
           });
 
