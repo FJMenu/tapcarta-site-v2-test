@@ -756,21 +756,34 @@ textarea.field-error{
       const taxField = form.querySelector('[name="tax_number"]');
       const taxValue = taxField ? taxField.value : '';
 
-      if(isSpainCountry(countryValue) && !isValidSpanishTaxNumber(taxValue)){
-        if(taxField){
-          taxField.classList.add('field-error');
-          taxField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          taxField.focus({ preventScroll: true });
+      if(isSpainCountry(countryValue)){
+        const normalizedTaxValue = normalizeTaxNumber(taxValue);
+
+        const { data: isSpanishTaxValid, error: taxValidationError } = await supabaseClient
+          .rpc('validate_spanish_tax_number', {
+            input_tax: normalizedTaxValue
+          });
+
+        if(taxValidationError || !isSpanishTaxValid){
+          if(taxField){
+            taxField.classList.add('field-error');
+            taxField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            taxField.focus({ preventScroll: true });
+          }
+
+          alert(
+            activeLang === 'es' ? 'Número fiscal español inválido. Use MAYÚSCULAS. Formato esperado: DNI 12345678Z, NIE X1234567L o NIF de empresa B12345678.' :
+            activeLang === 'en' ? 'Invalid Spanish tax number. Use UPPERCASE. Expected format: DNI 12345678Z, NIE X1234567L or company NIF B12345678.' :
+            activeLang === 'nl' ? 'Ongeldig Spaans fiscaal nummer. Gebruik HOOFDLETTERS. Verwacht formaat: DNI 12345678Z, NIE X1234567L of bedrijfs-NIF B12345678.' :
+            'Numéro fiscal espagnol invalide. Utilisez les MAJUSCULES. Format attendu : DNI 12345678Z, NIE X1234567L ou NIF société B12345678.'
+          );
+
+          return;
         }
 
-        alert(
-          activeLang === 'es' ? 'Número fiscal español inválido. Indique un DNI, NIE o NIF válido.' :
-          activeLang === 'en' ? 'Invalid Spanish tax number. Please enter a valid DNI, NIE or company NIF.' :
-          activeLang === 'nl' ? 'Ongeldig Spaans fiscaal nummer. Vul een geldige DNI, NIE of NIF in.' :
-          'Numéro fiscal espagnol invalide. Format attendu : DNI 12345678Z, NIE X1234567L ou NIF société B12345678.'
-        );
-
-        return;
+        if(taxField){
+          taxField.value = normalizedTaxValue;
+        }
       }
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
       const selectedOffer = (formData.get('selected_offer') || '').toString();
