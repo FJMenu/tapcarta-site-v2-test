@@ -316,7 +316,7 @@ textarea.field-error{
             <div class="secure-badge" data-i18n="form.badge">Données structurées · prêt pour validation</div>
           </div>
 
-          <form id="tapcartaJoinForm">
+          <form id="tapcartaJoinForm" novalidate>
             <input type="hidden" name="source" value="tapcarta_join_page">
             <input type="hidden" name="lead_status" value="activation_requested">
             <input type="hidden" name="activation_status" value="light_pending">
@@ -354,7 +354,7 @@ textarea.field-error{
               <h3 class="section-title"><span class="section-icon">4</span><span data-i18n="section.legal">Données légales et fiscales</span></h3>
               <div class="grid">
                 <label class="field"><span data-i18n="field.legalName">Nom légal / société</span><input name="legal_name" type="text" data-i18n-placeholder="ph.legalName" placeholder="Raison sociale ou nom légal"></label>
-                <label class="field"><span data-i18n="field.tax">Numéro fiscal</span><input name="tax_number" type="text" data-i18n-placeholder="ph.tax" placeholder="CIF / NIF / NIE / TVA / autre"></label>
+                <label class="field"><span data-i18n="field.tax">Numéro fiscal</span><input name="tax_number" type="text" style="text-transform:uppercase;" data-i18n-placeholder="ph.tax" placeholder="DNI / NIE / NIF en MAJUSCULES — ex. 12345678Z, X1234567L, B12345678"></label>
                 <label class="field full"><span data-i18n="field.billingEmail">Email de facturation</span><input name="billing_email" type="email" data-i18n-placeholder="ph.billingEmail" placeholder="Email de facturation si différent"></label>
               </div>
               <p class="hint" data-i18n-html="hint.fiscal"><strong>Important :</strong> ces informations seront nécessaires pour finaliser votre accès complet et la facturation.</p>
@@ -755,6 +755,7 @@ textarea.field-error{
       const countryValue = (formData.get('country') || '').toString().trim();
       const taxField = form.querySelector('[name="tax_number"]');
       const taxValue = taxField ? taxField.value : '';
+      let taxValueForPayload = taxValue;
 
       if(isSpainCountry(countryValue)){
         const normalizedTaxValue = normalizeTaxNumber(taxValue);
@@ -784,6 +785,8 @@ textarea.field-error{
         if(taxField){
           taxField.value = normalizedTaxValue;
         }
+
+        taxValueForPayload = normalizedTaxValue;
       }
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
       const selectedOffer = (formData.get('selected_offer') || '').toString();
@@ -839,7 +842,7 @@ const languagesRequested = [
             website_social: (formData.get('website_social') || '').toString().trim(),
             requester_role: (formData.get('requester_role') || '').toString(),
             legal_name: (formData.get('legal_name') || '').toString().trim(),
-            tax_number: (formData.get('tax_number') || '').toString().trim(),
+            tax_number: taxValueForPayload.toString().trim(),
             billing_email: (formData.get('billing_email') || '').toString().trim(),
             selected_offer: selectedOffer,
             needs: needs,
