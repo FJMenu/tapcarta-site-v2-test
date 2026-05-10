@@ -945,11 +945,11 @@ const languagesRequested = [
 
         const successBox = document.getElementById('successBox');
 
-        successBox.textContent =
-          activeLang === 'es' ? 'Solicitud enviada. Revise sus emails para confirmar su solicitud.' :
-          activeLang === 'en' ? 'Request sent. Please check your emails to confirm your request.' :
-          activeLang === 'nl' ? 'Aanvraag verzonden. Controleer uw e-mails om uw aanvraag te bevestigen.' :
-          'Demande envoyée. Vérifiez vos mails pour confirmer votre demande.';
+        successBox.innerHTML =
+          activeLang === 'es' ? 'Solicitud enviada correctamente.<br>Por seguridad, necesitamos confirmar que usted es realmente la persona que ha iniciado esta solicitud. Revise su email y confirme la solicitud para continuar.' :
+          activeLang === 'en' ? 'Request sent successfully.<br>For security reasons, we need to confirm that you are really the person who started this request. Please check your email and confirm the request to continue.' :
+          activeLang === 'nl' ? 'Aanvraag correct verzonden.<br>Om veiligheidsredenen moeten wij bevestigen dat u werkelijk de persoon bent die deze aanvraag heeft gestart. Controleer uw e-mail en bevestig de aanvraag om verder te gaan.' :
+          'Demande envoyée correctement.<br>Par sécurité, nous devons confirmer que vous êtes bien la personne à l’origine de cette demande. Vérifiez votre email et confirmez la demande pour continuer.';
 
         successBox.classList.add('show');
         successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -959,7 +959,7 @@ const languagesRequested = [
         });
 
         setTimeout(() => {
-          window.location.href = 'index.html';
+          window.location.replace('./index.html');
         }, 30000);
 
       }catch(error){
