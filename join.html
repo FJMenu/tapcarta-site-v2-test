@@ -606,7 +606,9 @@
       const recommendedOffer = getRecommendedOffer(needs);
 
       if(!offerTouchedByUser){
-        selectedOffer.value = recommendedOffer;
+        if(!offerTouchedByUser){
+  selectedOffer.value = recommendedOffer;
+}
       }
 
       const selectedValue = selectedOffer.value;
