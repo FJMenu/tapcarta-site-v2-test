@@ -225,7 +225,47 @@ textarea.field-error{
     .submit-row{display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-top:2px}
     .submit-note{color:var(--muted);font-size:13px;line-height:1.45;max-width:520px}
     .success-box{display:none;margin-top:16px;border:1px solid rgba(126,225,140,.30);background:rgba(126,225,140,.08);border-radius:18px;padding:16px;color:#eaffee;font-weight:800;line-height:1.5}
-    .success-box.show{display:block}
+    .tapcarta-modal{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:24px;
+  background:rgba(0,0,0,.72);
+  backdrop-filter:blur(8px);
+}
+
+.tapcarta-modal.show{display:flex}
+
+.tapcarta-modal-card{
+  width:min(520px,100%);
+  border:1px solid rgba(255,197,27,.35);
+  background:linear-gradient(180deg,#15171c,#0b0c0f);
+  border-radius:24px;
+  box-shadow:0 24px 80px rgba(0,0,0,.65);
+  padding:24px;
+}
+
+.tapcarta-modal-title{
+  color:var(--gold);
+  font-weight:950;
+  font-size:20px;
+  margin-bottom:12px;
+}
+
+.tapcarta-modal-text{
+  color:var(--text);
+  line-height:1.55;
+  font-weight:700;
+}
+
+.tapcarta-modal-actions{
+  display:flex;
+  justify-content:flex-end;
+  margin-top:22px;
+}
 
     .footer{padding:24px 0 42px;color:var(--soft);font-size:13px;text-align:center;border-top:1px solid rgba(255,255,255,.07)}
 
@@ -650,7 +690,27 @@ textarea.field-error{
         recommendationPrefix:'Op basis van uw behoeften lijkt de meest geschikte formule: '
       }
     };
+    function showTapCartaModal(message, title){
+      const modal = document.getElementById('tapcartaModal');
+      const modalTitle = document.getElementById('tapcartaModalTitle');
+      const modalText = document.getElementById('tapcartaModalText');
+      const modalClose = document.getElementById('tapcartaModalClose');
 
+      if(!modal || !modalTitle || !modalText || !modalClose){
+        console.warn(message);
+        return;
+      }
+
+      modalTitle.textContent = title || 'TapCarta';
+      modalText.textContent = message;
+      modal.classList.add('show');
+      modal.setAttribute('aria-hidden', 'false');
+
+      modalClose.onclick = () => {
+        modal.classList.remove('show');
+        modal.setAttribute('aria-hidden', 'true');
+      };
+    }
     let offerTouchedByUser = false;
 
     function getRecommendedOffer(needs){
@@ -772,11 +832,15 @@ textarea.field-error{
             taxField.focus({ preventScroll: true });
           }
 
-          alert(
+          showTapCartaModal(
             activeLang === 'es' ? 'Número fiscal español inválido. Use MAYÚSCULAS. Formato esperado: DNI 12345678Z, NIE X1234567L o NIF de empresa B12345678.' :
             activeLang === 'en' ? 'Invalid Spanish tax number. Use UPPERCASE. Expected format: DNI 12345678Z, NIE X1234567L or company NIF B12345678.' :
             activeLang === 'nl' ? 'Ongeldig Spaans fiscaal nummer. Gebruik HOOFDLETTERS. Verwacht formaat: DNI 12345678Z, NIE X1234567L of bedrijfs-NIF B12345678.' :
-            'Numéro fiscal espagnol invalide. Utilisez les MAJUSCULES. Format attendu : DNI 12345678Z, NIE X1234567L ou NIF société B12345678.'
+            'Numéro fiscal espagnol invalide. Utilisez les MAJUSCULES. Format attendu : DNI 12345678Z, NIE X1234567L ou NIF société B12345678.',
+            activeLang === 'es' ? 'Dato fiscal inválido' :
+            activeLang === 'en' ? 'Invalid tax number' :
+            activeLang === 'nl' ? 'Ongeldig fiscaal nummer' :
+            'Numéro fiscal invalide'
           );
 
           return;
@@ -889,5 +953,14 @@ const languagesRequested = [
       }
     });
   </script>
+  <div class="tapcarta-modal" id="tapcartaModal" aria-hidden="true">
+  <div class="tapcarta-modal-card">
+    <div class="tapcarta-modal-title" id="tapcartaModalTitle">TapCarta</div>
+    <div class="tapcarta-modal-text" id="tapcartaModalText"></div>
+    <div class="tapcarta-modal-actions">
+      <button class="btn btn-primary" type="button" id="tapcartaModalClose">OK</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>
