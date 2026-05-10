@@ -454,6 +454,8 @@
     </div>
   </footer>
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script>
     const translations = {
       fr:{
@@ -493,6 +495,24 @@
         if(dict[key]) el.setAttribute('placeholder', dict[key]);
       });
       document.querySelectorAll('.lang-btn').forEach(btn=>btn.classList.toggle('active', btn.dataset.lang === lang));
+    }
+
+    const SUPABASE_URL = 'https://uzuejudgccpnuzqefjre.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_FUtVznXw3Y0dftgEE7zgHg_aTbK669l';
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    function generateSlug(value){
+      const base = (value || 'restaurant')
+        .toString()
+        .trim()
+        .toLowerCase()
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '')
+        .substring(0, 48) || 'restaurant';
+
+      return base + '-' + Date.now().toString(36).slice(-5);
     }
 
     let activeLang = detectLanguage();
@@ -624,10 +644,94 @@
       updateOfferFromNeeds();
     });
 
-    document.getElementById('tapcartaJoinForm').addEventListener('submit', function(event){
+    document.getElementById('tapcartaJoinForm').addEventListener('submit', async function(event){
       event.preventDefault();
-      document.getElementById('successBox').classList.add('show');
-      document.getElementById('successBox').scrollIntoView({behavior:'smooth', block:'center'});
+
+      const form = event.target;
+      const submitButton = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+
+      const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
+      const selectedOffer = (formData.get('selected_offer') || 'light').toString();
+      const preferredLanguage = (formData.get('preferred_language') || activeLang || 'fr').toString();
+      const needs = formData.getAll('needs');
+      const languagesRequested = formData.getAll('languages_requested');
+      const restaurantId = crypto.randomUUID();
+      const restaurantSlug = generateSlug(restaurantName);
+
+      if(submitButton){
+        submitButton.disabled = true;
+        submitButton.style.opacity = '0.7';
+      }
+
+      try{
+        const { error: restaurantError } = await supabaseClient
+          .from('restaurants')
+          .insert({
+            id: restaurantId,
+            name: restaurantName,
+            slug: restaurantSlug,
+            status: 'join_requested',
+            pack_code: selectedOffer
+          });
+
+        if(restaurantError) throw restaurantError;
+
+        const { error: joinError } = await supabaseClient
+          .from('join_requests')
+          .insert({
+            restaurant_id: restaurantId,
+            contact_name: (formData.get('contact_name') || '').toString().trim(),
+            contact_email: (formData.get('contact_email') || '').toString().trim(),
+            contact_phone: (formData.get('contact_phone') || '').toString().trim(),
+            preferred_language: preferredLanguage,
+            restaurant_trade_name: restaurantName,
+            restaurant_type: (formData.get('restaurant_type') || '').toString(),
+            city: (formData.get('city') || '').toString().trim(),
+            country: (formData.get('country') || '').toString().trim(),
+            address: (formData.get('address') || '').toString().trim(),
+            website_social: (formData.get('website_social') || '').toString().trim(),
+            requester_role: (formData.get('requester_role') || '').toString(),
+            legal_name: (formData.get('legal_name') || '').toString().trim(),
+            tax_number: (formData.get('tax_number') || '').toString().trim(),
+            billing_email: (formData.get('billing_email') || '').toString().trim(),
+            selected_offer: selectedOffer,
+            needs: needs,
+            languages_requested: languagesRequested,
+            message: (formData.get('message') || '').toString().trim(),
+            status: 'pending_review'
+          });
+
+        if(joinError) throw joinError;
+
+        await supabaseClient.from('onboarding_assets').insert({
+          restaurant_id: restaurantId,
+          translation_service_requested: needs.includes('translation'),
+          translation_fee: needs.includes('translation') ? 30 : 0
+        });
+
+        await supabaseClient.from('billing_setup').insert({
+          restaurant_id: restaurantId,
+          provider: 'gocardless',
+          status: 'pending',
+          currency: 'EUR'
+        });
+
+        document.getElementById('successBox').classList.add('show');
+        document.getElementById('successBox').scrollIntoView({behavior:'smooth', block:'center'});
+        form.reset();
+        offerTouchedByUser = false;
+        updateOfferFromNeeds();
+
+      }catch(error){
+        console.error('TapCarta join submit error:', error);
+        alert('Erreur lors de l’envoi de la demande. Merci de réessayer.');
+      }finally{
+        if(submitButton){
+          submitButton.disabled = false;
+          submitButton.style.opacity = '1';
+        }
+      }
     });
   </script>
 </body>
