@@ -520,7 +520,80 @@ textarea.field-error{
 
       return base + '-' + Date.now().toString(36).slice(-5);
     }
+    function normalizeTaxNumber(value){
+      return (value || '')
+        .toString()
+        .trim()
+        .toUpperCase()
+        .replace(/[\s.-]/g, '');
+    }
 
+    function isSpainCountry(value){
+      const country = (value || '').toString().trim().toLowerCase();
+      return ['espagne', 'españa', 'spain', 'es'].includes(country);
+    }
+
+    function isValidSpanishDni(value){
+      const tax = normalizeTaxNumber(value);
+      if(!/^[0-9]{8}[A-Z]$/.test(tax)) return false;
+
+      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      const number = parseInt(tax.slice(0, 8), 10);
+      return tax[8] === letters[number % 23];
+    }
+
+    function isValidSpanishNie(value){
+      const tax = normalizeTaxNumber(value);
+      if(!/^[XYZ][0-9]{7}[A-Z]$/.test(tax)) return false;
+
+      const prefixMap = { X: '0', Y: '1', Z: '2' };
+      const dniLikeNumber = prefixMap[tax[0]] + tax.slice(1, 8);
+      const letters = 'TRWAGMYFPDXBNJZSQVHLCKE';
+      const number = parseInt(dniLikeNumber, 10);
+
+      return tax[8] === letters[number % 23];
+    }
+
+    function isValidSpanishCompanyNif(value){
+      const tax = normalizeTaxNumber(value);
+      if(!/^[ABCDEFGHJKLMNPQRSUVW][0-9]{7}[0-9A-J]$/.test(tax)) return false;
+
+      const firstLetter = tax[0];
+      const digits = tax.slice(1, 8).split('').map(Number);
+      const control = tax[8];
+
+      let sum = 0;
+
+      for(let i = 0; i < digits.length; i++){
+        if(i % 2 === 0){
+          const doubled = digits[i] * 2;
+          sum += Math.floor(doubled / 10) + (doubled % 10);
+        }else{
+          sum += digits[i];
+        }
+      }
+
+      const controlDigit = (10 - (sum % 10)) % 10;
+      const controlLetter = 'JABCDEFGHI'[controlDigit];
+
+      if('ABEH'.includes(firstLetter)){
+        return control === String(controlDigit);
+      }
+
+      if('KPQSNW'.includes(firstLetter)){
+        return control === controlLetter;
+      }
+
+      return control === String(controlDigit) || control === controlLetter;
+    }
+
+    function isValidSpanishTaxNumber(value){
+      return (
+        isValidSpanishDni(value) ||
+        isValidSpanishNie(value) ||
+        isValidSpanishCompanyNif(value)
+      );
+    }
     let activeLang = detectLanguage();
 
     const offerMessages = {
@@ -663,6 +736,8 @@ textarea.field-error{
 
       const form = event.target;
       const submitButton = form.querySelector('button[type="submit"]');
+      const formData = new FormData(form);
+
       form.querySelectorAll('.field-error').forEach(el => el.classList.remove('field-error'));
 
       const requiredFields = Array.from(form.querySelectorAll('[required]'));
@@ -677,7 +752,26 @@ textarea.field-error{
         firstInvalidField.focus({ preventScroll: true });
         return;
       }
+      const countryValue = (formData.get('country') || '').toString().trim();
+      const taxField = form.querySelector('[name="tax_number"]');
+      const taxValue = taxField ? taxField.value : '';
 
+      if(isSpainCountry(countryValue) && !isValidSpanishTaxNumber(taxValue)){
+        if(taxField){
+          taxField.classList.add('field-error');
+          taxField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          taxField.focus({ preventScroll: true });
+        }
+
+        alert(
+          activeLang === 'es' ? 'Número fiscal español inválido. Indique un DNI, NIE o NIF válido.' :
+          activeLang === 'en' ? 'Invalid Spanish tax number. Please enter a valid DNI, NIE or company NIF.' :
+          activeLang === 'nl' ? 'Ongeldig Spaans fiscaal nummer. Vul een geldige DNI, NIE of NIF in.' :
+          'Numéro fiscal espagnol invalide. Indiquez un DNI, NIE ou NIF valide.'
+        );
+
+        return;
+      }
       const restaurantName = (formData.get('restaurant_trade_name') || '').toString().trim();
       const selectedOffer = (formData.get('selected_offer') || '').toString();
 
