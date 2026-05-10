@@ -943,11 +943,24 @@ const languagesRequested = [
           currency: 'EUR'
         });
 
-        document.getElementById('successBox').classList.add('show');
-        document.getElementById('successBox').scrollIntoView({behavior:'smooth', block:'center'});
-        form.reset();
-        offerTouchedByUser = false;
-        updateOfferFromNeeds();
+        const successBox = document.getElementById('successBox');
+
+        successBox.textContent =
+          activeLang === 'es' ? 'Solicitud enviada. Revise sus emails para confirmar su solicitud.' :
+          activeLang === 'en' ? 'Request sent. Please check your emails to confirm your request.' :
+          activeLang === 'nl' ? 'Aanvraag verzonden. Controleer uw e-mails om uw aanvraag te bevestigen.' :
+          'Demande envoyée. Vérifiez vos mails pour confirmer votre demande.';
+
+        successBox.classList.add('show');
+        successBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+
+        Array.from(form.elements).forEach(element => {
+          element.disabled = true;
+        });
+
+        setTimeout(() => {
+          window.location.href = 'index.html';
+        }, 30000);
 
       }catch(error){
         console.error('TapCarta join submit error:', error);
