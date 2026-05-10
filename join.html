@@ -546,7 +546,13 @@ textarea.field-error{
 
     const SUPABASE_URL = 'https://uzuejudgccpnuzqefjre.supabase.co';
     const SUPABASE_ANON_KEY = 'sb_publishable_FUtVznXw3Y0dftgEE7zgHg_aTbK669l';
-    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    const supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+      auth: {
+        persistSession: false,
+        autoRefreshToken: false,
+        detectSessionInUrl: false
+      }
+    });
 
     function generateSlug(value){
       const base = (value || 'restaurant')
