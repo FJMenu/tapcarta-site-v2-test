@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>TapCarta — Confirmation</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root{
+      --bg:#050505;
+      --card:#111317;
+      --gold:#ffc51b;
+      --text:#f7f4ea;
+      --muted:#b7b8bd;
+      --line:rgba(255,255,255,.12);
+    }
+
+    *{box-sizing:border-box}
+
+    body{
+      margin:0;
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      background:
+        radial-gradient(circle at top right, rgba(255,197,27,.18), transparent 30%),
+        linear-gradient(180deg,#020202,#08090b,#050505);
+      color:var(--text);
+      font-family:Inter,Arial,sans-serif;
+    }
+
+    .card{
+      width:min(560px,100%);
+      background:linear-gradient(180deg,rgba(255,255,255,.07),rgba(255,255,255,.03));
+      border:1px solid var(--line);
+      border-radius:28px;
+      padding:34px;
+      text-align:center;
+      box-shadow:0 24px 80px rgba(0,0,0,.55);
+    }
+
+    h1{
+      margin:0 0 18px;
+      color:var(--gold);
+      font-size:34px;
+      line-height:1.1;
+    }
+
+    p{
+      margin:0;
+      line-height:1.6;
+      color:var(--muted);
+      font-size:16px;
+    }
+
+    .loader{
+      width:58px;
+      height:58px;
+      margin:0 auto 24px;
+      border-radius:50%;
+      border:4px solid rgba(255,255,255,.12);
+      border-top-color:var(--gold);
+      animation:spin 1s linear infinite;
+    }
+
+    .success{
+      color:#7ee18c;
+    }
+
+    .error{
+      color:#ff8c8c;
+    }
+
+    @keyframes spin{
+      to{transform:rotate(360deg)}
+    }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <div class="loader" id="loader"></div>
+
+    <h1 id="title">
+      Confirmation en cours...
+    </h1>
+
+    <p id="message">
+      Vérification sécurisée de votre demande TapCarta.
+    </p>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://uzuejudgccpnuzqefjre.supabase.co';
+    const SUPABASE_ANON_KEY = 'sb_publishable_FUtVznXw3Y0dftgEE7zgHg_aTbK669l';
+
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY,
+      {
+        auth:{
+          persistSession:false,
+          autoRefreshToken:false,
+          detectSessionInUrl:false
+        }
+      }
+    );
+
+    async function confirmRequest(){
+      const params = new URLSearchParams(window.location.search);
+
+      const token = params.get('token');
+
+      const title = document.getElementById('title');
+      const message = document.getElementById('message');
+      const loader = document.getElementById('loader');
+
+      if(!token){
+        loader.style.display = 'none';
+
+        title.textContent = 'Lien invalide';
+        title.classList.add('error');
+
+        message.textContent =
+          'Ce lien de confirmation est invalide ou incomplet.';
+
+        return;
+      }
+
+      try{
+
+        const { data, error } = await supabaseClient
+          .from('join_requests')
+          .select('id,status,restaurant_trade_name')
+          .eq('confirmation_token', token)
+          .maybeSingle();
+
+        if(error) throw error;
+
+        if(!data){
+          loader.style.display = 'none';
+
+          title.textContent = 'Lien introuvable';
+          title.classList.add('error');
+
+          message.textContent =
+            'Cette demande n’existe pas ou a déjà été confirmée.';
+
+          return;
+        }
+
+        await supabaseClient
+          .from('join_requests')
+          .update({
+            status:'email_confirmed'
+          })
+          .eq('id', data.id);
+
+        loader.style.display = 'none';
+
+        title.textContent = 'Email confirmé';
+        title.classList.add('success');
+
+        message.innerHTML =
+          `Votre demande TapCarta pour <strong>${data.restaurant_trade_name}</strong> a bien été confirmée.<br><br>
+          Nous allons maintenant préparer la suite de votre onboarding.`;
+
+      }catch(error){
+
+        console.error(error);
+
+        loader.style.display = 'none';
+
+        title.textContent = 'Erreur';
+        title.classList.add('error');
+
+        message.textContent =
+          'Une erreur est survenue pendant la confirmation.';
+      }
+    }
+
+    confirmRequest();
+  </script>
+
+</body>
+</html>
