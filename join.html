@@ -949,6 +949,23 @@ confirmation_token: confirmationToken,
         });
 
         const successBox = document.getElementById('successBox');
+              try {
+        await fetch('https://uzuejudgccpnuzqefjre.supabase.co/functions/v1/send-confirmation-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          },
+          body: JSON.stringify({
+            restaurantName: formData.get('restaurant_trade_name') || '',
+            contactName: formData.get('contact_name') || '',
+            contactEmail: formData.get('contact_email') || '',
+            confirmationLink: 'https://tapcarta.com'
+          })
+        });
+      } catch(emailError){
+        console.error('Email confirmation error:', emailError);
+      }
 
         successBox.innerHTML =
           activeLang === 'es' ? 'Solicitud enviada correctamente.<br>Por seguridad, necesitamos confirmar que usted es realmente la persona que ha iniciado esta solicitud. Revise su email y confirme la solicitud para continuar.' :
