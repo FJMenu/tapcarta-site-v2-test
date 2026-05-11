@@ -884,6 +884,10 @@ const languagesRequested = [
 ];
       const restaurantId = crypto.randomUUID();
       const restaurantSlug = generateSlug(restaurantName);
+const confirmationToken =
+  crypto.randomUUID() +
+  '-' +
+  Date.now().toString(36);
 
       if(submitButton){
         submitButton.disabled = true;
@@ -907,6 +911,7 @@ const languagesRequested = [
           .from('join_requests')
           .insert({
             restaurant_id: restaurantId,
+confirmation_token: confirmationToken,
             contact_name: (formData.get('contact_name') || '').toString().trim(),
             contact_email: (formData.get('contact_email') || '').toString().trim(),
             contact_phone: (formData.get('contact_phone') || '').toString().trim(),
