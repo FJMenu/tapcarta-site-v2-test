@@ -960,6 +960,7 @@ textarea.field-error{
               restaurantName: formData.get('restaurant_trade_name') || '',
               contactName: formData.get('contact_name') || '',
               contactEmail: formData.get('contact_email') || '',
+              preferredLanguage: preferredLanguage,
               confirmationLink: `https://tapcarta.com/confirm-email.html?token=${encodeURIComponent(confirmationToken)}`
             })
           });
