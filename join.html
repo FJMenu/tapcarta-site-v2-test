@@ -774,6 +774,12 @@ textarea.field-error{
 
     document.querySelectorAll('.lang-btn').forEach(btn=>btn.addEventListener('click',()=>{
       activeLang = btn.dataset.lang;
+
+      const preferredLanguageSelect = document.querySelector('[name="preferred_language"]');
+      if(preferredLanguageSelect && ['fr', 'es', 'en', 'nl'].includes(activeLang)){
+        preferredLanguageSelect.value = activeLang;
+      }
+
       applyLang(activeLang);
       updateOfferFromNeeds();
     }));
